@@ -1,21 +1,22 @@
-import { NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 
-export async function GET(
-  _: Request,
-  { params }: { params: { month: string } }
-) {
-  if (
-    !params?.month ||
-    !(parseInt(params?.month) > 0 && parseInt(params?.month) < 13)
-  ) {
+type Context = {
+  params: Promise<{
+    month: string;
+  }>;
+};
+
+export async function GET(req: NextRequest, context: Context) {
+  const month = (await context?.params)?.month;
+
+  const monthNumber = parseInt(month);
+  if (isNaN(monthNumber) || monthNumber < 1 || monthNumber > 12) {
     return NextResponse.json(
       { error: "Invalid month number. Month number should be >= 1 and <= 12" },
       { status: 400 }
     );
   }
-
-  const monthNumber = parseInt(params?.month);
 
   const { data, error } = await supabase.rpc("get_expenses_by_month", {
     month_number: monthNumber,
