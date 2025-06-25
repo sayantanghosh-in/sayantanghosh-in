@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
+import { handleCors, handleOptions } from "@/lib/cors";
 
 type Context = {
   params: Promise<{
@@ -7,7 +8,12 @@ type Context = {
   }>;
 };
 
+export async function OPTIONS(req: NextRequest) {
+  return handleOptions(req);
+}
+
 export async function GET(req: NextRequest, context: Context) {
+  const headers = handleCors(req);
   const month = (await context?.params)?.month;
 
   const monthNumber = parseInt(month);
@@ -24,7 +30,10 @@ export async function GET(req: NextRequest, context: Context) {
 
   if (error) {
     console.error("RPC error:", error.message);
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    return new NextResponse(JSON.stringify({ error: error.message }), {
+      status: 500,
+      headers,
+    });
   }
 
   return NextResponse.json({ data }, { status: 200 });
