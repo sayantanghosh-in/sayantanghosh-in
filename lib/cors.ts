@@ -1,26 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const allowedOrigins = ["http://localhost:3000", "https://gotodash.vercel.app"];
+const allowedOrigins = ["http://localhost:5173", "https://gotodash.vercel.app"];
 
-export function handleCors(req: NextRequest): Headers {
-  const origin = req.headers.get("origin") || "";
+// Helper to build proper CORS headers
+export function getCorsHeaders(origin: string): HeadersInit {
   const corsOrigin = allowedOrigins.includes(origin) ? origin : "";
-
-  const headers = new Headers();
-  headers.set("Access-Control-Allow-Origin", corsOrigin);
-  headers.set(
-    "Access-Control-Allow-Methods",
-    "GET, POST, PUT, DELETE, OPTIONS"
-  );
-  headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
-
-  return headers;
-}
-
-export function handleOptions(req: NextRequest) {
-  const headers = handleCors(req);
-  return new NextResponse(null, {
-    status: 204,
-    headers,
-  });
+  return {
+    "Access-Control-Allow-Origin": corsOrigin,
+    "Access-Control-Allow-Methods": "GET, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Max-Age": "86400",
+  };
 }

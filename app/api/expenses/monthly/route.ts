@@ -1,22 +1,34 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
-import { handleCors, handleOptions } from "@/lib/cors";
+import { getCorsHeaders } from "@/lib/cors";
 
+// Preflight handler
 export async function OPTIONS(req: NextRequest) {
-  return handleOptions(req);
+  const origin = req.headers.get("origin") || "";
+  const headers = getCorsHeaders(origin);
+
+  return new NextResponse(null, {
+    status: 204,
+    headers,
+  });
 }
 
+// GET handler
 export async function GET(req: NextRequest) {
-  const headers = handleCors(req);
+  const origin = req.headers.get("origin") || "";
+  const headers = getCorsHeaders(origin);
+
   const { data, error } = await supabase.rpc("get_current_month_expenses");
 
   if (error) {
-    console.error("RPC error:", error.message);
     return new NextResponse(JSON.stringify({ error: error.message }), {
       status: 500,
       headers,
     });
   }
 
-  return NextResponse.json({ data }, { status: 200 });
+  return new NextResponse(JSON.stringify({ data }), {
+    status: 200,
+    headers,
+  });
 }

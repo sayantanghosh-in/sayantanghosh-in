@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
-import { handleCors, handleOptions } from "@/lib/cors";
+import { getCorsHeaders } from "@/lib/cors";
 
 type Context = {
   params: Promise<{
@@ -8,12 +8,19 @@ type Context = {
   }>;
 };
 
+// Preflight handler
 export async function OPTIONS(req: NextRequest) {
-  return handleOptions(req);
+  const origin = req.headers.get("origin") || "";
+  const headers = getCorsHeaders(origin);
+
+  return new NextResponse(null, {
+    status: 204,
+    headers,
+  });
 }
 
 export async function GET(req: NextRequest, context: Context) {
-  const headers = handleCors(req);
+  const headers = getCorsHeaders(origin);
   const month = (await context?.params)?.month;
 
   const monthNumber = parseInt(month);
