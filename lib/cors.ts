@@ -1,5 +1,3 @@
-import { NextRequest, NextResponse } from "next/server";
-
 const allowedOrigins = ["http://localhost:5173", "https://gotodash.vercel.app"];
 
 // Helper to build proper CORS headers
