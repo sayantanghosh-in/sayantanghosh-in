@@ -26,5 +26,5 @@ export async function GET(req: NextRequest) {
     });
   }
 
-  return NextResponse.json({ data }, { status: 200 });
+  return NextResponse.json({ data }, { status: 200, headers });
 }

@@ -28,7 +28,7 @@ export async function GET(req: NextRequest, context: Context) {
   if (isNaN(monthNumber) || monthNumber < 1 || monthNumber > 12) {
     return NextResponse.json(
       { error: "Invalid month number. Month number should be >= 1 and <= 12" },
-      { status: 400 }
+      { status: 400, headers }
     );
   }
 
@@ -44,5 +44,5 @@ export async function GET(req: NextRequest, context: Context) {
     });
   }
 
-  return NextResponse.json({ data }, { status: 200 });
+  return NextResponse.json({ data }, { status: 200, headers });
 }
