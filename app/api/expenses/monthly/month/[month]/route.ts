@@ -20,6 +20,7 @@ export async function OPTIONS(req: NextRequest) {
 }
 
 export async function GET(req: NextRequest, context: Context) {
+  const origin = req.headers.get("origin") || "";
   const headers = getCorsHeaders(origin);
   const month = (await context?.params)?.month;
 

@@ -13,7 +13,8 @@ export async function OPTIONS(req: NextRequest) {
   });
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const origin = req.headers.get("origin") || "";
   const headers = getCorsHeaders(origin);
   const { data, error } = await supabase.from("expenses_category").select("*");
 
