@@ -6,7 +6,7 @@ import { getCorsHeaders } from "@/lib/cors";
 // Handle CORS preflight
 export async function OPTIONS(req: NextRequest) {
   const origin = req.headers.get("origin") || "";
-  const headers = getCorsHeaders(origin);
+  const headers = getCorsHeaders(origin, "DELETE, GET, OPTIONS, POST, PUT");
 
   return new NextResponse(null, {
     status: 204,
