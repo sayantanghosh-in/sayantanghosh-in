@@ -1,4 +1,7 @@
-const allowedOrigins = ["http://localhost:5173", "https://gotodash.vercel.app"];
+export const allowedOrigins = [
+  "http://localhost:5173",
+  "https://gotodash.vercel.app",
+];
 
 // Helper to build proper CORS headers
 export function getCorsHeaders(origin: string, methods?: string): HeadersInit {
