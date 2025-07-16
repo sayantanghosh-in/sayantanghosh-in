@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
       { message: "User registered successfully" },
       { status: 201 }
     );
-  } catch (e: any) {
+  } catch (e) {
     console.error("Unexpected error:", e);
     return NextResponse.json(
       { error: "Internal server error" },
