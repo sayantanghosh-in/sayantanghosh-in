@@ -20,14 +20,14 @@ export async function POST(req: NextRequest) {
   const res = NextResponse.json({ message: "Logged in", redirect_url });
 
   res.cookies.set({
-    name: "sgsh-sb-access-token",
+    name: "sayantanghosh-sb-access-token",
     value: data.session.access_token,
     httpOnly: true,
     secure: true,
     sameSite: "strict",
     domain:
       process.env.NODE_ENV === "production"
-        ? ".sgsh.in"
+        ? ".sayantanghosh.in"
         : allowedOrigins?.[0]?.split("http://")?.[1], // important
     path: "/",
     maxAge: 60 * 60 * 24 * 7,
