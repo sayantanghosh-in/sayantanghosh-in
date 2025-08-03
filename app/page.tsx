@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { Nav } from "./components/Nav";
 
 export default function Home() {
@@ -6,7 +8,7 @@ export default function Home() {
       <header className="md:w-[48%] md:sticky md:top-0 md:py-24 md:max-h-screen flex flex-col justify-between">
         <div>
           <h1 className="text-4xl font-bold color-foreground">
-            <a href="/">Sayantan Ghosh</a>
+            <Link href="https://sayantanghosh.in">Sayantan Ghosh</Link>
           </h1>
           <h2 className="mt-2 text-sm text-[var(--color-green-accent)]">
             Front End Engineer
@@ -19,16 +21,20 @@ export default function Home() {
         </div>
         <ul className="mt-4 md:mt-16 flex gap-2 items-center">
           <li>
-            <a href="https://github.com/sayantanghosh-in">Github</a>
+            <Link href="https://github.com/sayantanghosh-in">Github</Link>
           </li>
           <li>
-            <a href="https://www.linkedin.com/in/sayantanghosh-in/">Linkedin</a>
+            <Link href="https://www.linkedin.com/in/sayantanghosh-in/">
+              Linkedin
+            </Link>
           </li>
           <li>
-            <a href="https://x.com/sayantan__ghosh">X</a>
+            <Link href="https://x.com/sayantan__ghosh">X</Link>
           </li>
           <li>
-            <a href="https://www.instagram.com/sayantanghosh_in/">Instagram</a>
+            <Link href="https://www.instagram.com/sayantanghosh_in/">
+              Instagram
+            </Link>
           </li>
         </ul>
       </header>
