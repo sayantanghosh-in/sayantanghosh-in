@@ -10,16 +10,13 @@ export const Nav = () => {
     <nav className="border-x-1 px-2">
       <ul className="flex flex-row gap-4 items-center justify-end">
         <li>
-          <Link
-            href="https://sayantanghosh.in"
-            className="text-sm text-[var(--accent-foreground)]"
-          >
+          <Link href="/" className="text-sm text-[var(--accent-foreground)]">
             Home
           </Link>
         </li>
         <li>
           <Link
-            href="https://sayantanghosh.in/blog"
+            href="/blog"
             className="text-sm text-[var(--accent-foreground)]"
           >
             Blog

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import {
   IconBriefcase,
   IconMail,
@@ -21,27 +22,27 @@ export const BasicDetails = () => {
         <IconMapPin size={16} color="var(--accent-foreground)" stroke={1.5} />{" "}
         Bengaluru, India
       </p>
-      <a
+      <Link
         href="https://sayantanghosh.in"
         className="text-sm text-[var(--accent-foreground)] flex gap-1.25 items-center"
       >
         <IconWorld size={16} color="var(--accent-foreground)" stroke={1.5} />{" "}
         www.sayantanghosh.in
-      </a>
-      <a
+      </Link>
+      <Link
         href="tel:+917697505444"
         className="text-sm text-[var(--accent-foreground)] flex gap-1.25 items-center"
       >
         <IconPhone size={16} color="var(--accent-foreground)" stroke={1.5} />{" "}
         +91-7697505444
-      </a>
-      <a
+      </Link>
+      <Link
         href="mailto:sayantan.ghosh03@gmail.com"
         className="text-sm text-[var(--accent-foreground)] flex gap-1.25 items-center"
       >
         <IconMail size={16} color="var(--accent-foreground)" stroke={1.5} />{" "}
         sayantan.ghosh03@gmail.com
-      </a>
+      </Link>
     </div>
   );
 };

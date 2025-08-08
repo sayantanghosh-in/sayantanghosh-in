@@ -1,9 +1,14 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { Nav } from "./components/Nav";
 import { Gradient } from "./components/Gradient";
 import { BasicDetails } from "./components/BasicDetails";
 import { Experience } from "./components/Experience";
+import { About } from "./components/About";
+import { Button } from "@/components/ui/button";
+import { Social } from "./components/Social";
+import { IconHeart } from "@tabler/icons-react";
 
 export default function Home() {
   return (
@@ -38,19 +43,49 @@ export default function Home() {
         </section>
         <Gradient additionalClass="border-t-1" />
         <section className="border-t-1 px-2 md:px-32 lg:px-96">
+          <About />
+        </section>
+        <Gradient additionalClass="border-t-1" />
+        <section className="border-t-1 px-2 md:px-32 lg:px-96">
+          <Social />
+        </section>
+        <Gradient additionalClass="border-t-1" />
+        <section className="border-t-1 px-2 md:px-32 lg:px-96">
           <h2 className="text-2xl font-semibold">Experience</h2>
         </section>
         <Experience />
         <Gradient additionalClass="border-t-1" />
         <section className="border-t-1 px-2 md:px-32 lg:px-96">
-          projects
+          <h2 className="text-2xl font-semibold">Projects</h2>
+        </section>
+        <section className="border-t-1 px-2 md:px-32 lg:px-96">
+          <div className="border-x-1 px-2 flex justify-center py-2">
+            <Button asChild>
+              <Link target="_blank" href="https://github.com/sayantanghosh-in">
+                Show all Projects
+              </Link>
+            </Button>
+          </div>
         </section>
         <Gradient additionalClass="border-t-1" />
-        <section className="border-t-1 px-2 md:px-32 lg:px-96">blog</section>
+        <section className="border-t-1 px-2 md:px-32 lg:px-96">
+          <h2 className="text-2xl font-semibold">Blog</h2>
+        </section>
+        <section className="border-t-1 px-2 md:px-32 lg:px-96">
+          <div className="border-x-1 px-2 flex justify-center py-2">
+            <Button asChild>
+              <Link href="/blog">Show all Posts</Link>
+            </Button>
+          </div>
+        </section>
       </main>
+      <Gradient additionalClass="border-t-1" />
       <footer className="border-y-1 px-2 md:px-32 lg:px-96">
-        <section>social links</section>
-        <section>copyright</section>
+        <section className="border-x-1 px-2 text-xs flex justify-center items-center gap-0.5 py-2">
+          <span>Made with</span>
+          <IconHeart size={12} fill="var(--destructive)" /> by
+          <span>Sayantan Ghosh</span>
+        </section>
       </footer>
     </div>
   );

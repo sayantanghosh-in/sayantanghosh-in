@@ -10,6 +10,21 @@ export const metadata: Metadata = {
   title: "Sayantan Ghosh",
   description:
     "My name is Sayantan Ghosh. I am a front end engineer specializing in React.JS, Typescript, Next.JS and various other technologies like Express.JS, Node.JS, PostgreSQL, etc.",
+  openGraph: {
+    title: "Sayantan Ghosh",
+    description:
+      "My name is Sayantan Ghosh. I am a front end engineer specializing in React.JS, Typescript, Next.JS and various other technologies like Express.JS, Node.JS, PostgreSQL, etc.",
+    url: "https://sayantanghosh.in",
+    siteName: "Sayantan Ghosh",
+    images: [
+      {
+        url: "https://sayantanghosh.in/sayantan.png",
+        width: 320,
+        height: 320,
+        alt: "Sayantan Ghosh Website Open Graph Image",
+      },
+    ],
+  },
   keywords: [
     "Sayantan",
     "Ghosh",

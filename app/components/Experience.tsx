@@ -15,11 +15,21 @@ type Experience = {
 const experiences: Experience[] = [
   {
     company: "Synup",
-    stack: [],
+    stack: [
+      "React.js",
+      "Typescript",
+      "Apollo Graphql",
+      "Next.js",
+      "Express",
+      "Postgresql",
+      "HTML5",
+      "CSS3",
+      "Javascript",
+    ],
     experience: [
       {
         designation: "Senior Software Engineer",
-        date: "Oct 2022 - Present · 2 yrs 11 mos",
+        date: "Oct 2022 - Present",
         exp: [
           "Led UI development for new marketing products; mentored a team of junior developers and improved onboarding efficiency by ~25%.",
           "Standardized UI components with private npm package & Storybook, reducing customer churn by 15% with better UX predictability.",
@@ -30,7 +40,7 @@ const experiences: Experience[] = [
       },
       {
         designation: "Software Engineer",
-        date: "May 2021 - Oct 2022 · 1 yr 6 mos",
+        date: "May 2021 - Oct 2022",
         exp: [
           "Built multiple applications with third-party social media/CRM integrations, increasing company revenue by 10%.",
           "Implemented Test-Driven Development (TDD), enhancing code quality by 25% and reducing post-release defects by 18%.",
@@ -40,11 +50,11 @@ const experiences: Experience[] = [
   },
   {
     company: "Senseforth AI",
-    stack: [],
+    stack: ["React.js", "Typescript", "HTML5", "CSS3", "Javascript"],
     experience: [
       {
         designation: "Software Engineer",
-        date: "Jun 2020 - May 2021 · 1 yr",
+        date: "Jun 2020 - May 2021",
         exp: [
           "Upgraded conversational chatbot platform for BFSI domain, streamlining customer interactions and improving response times by 15%.",
           "Standardized marketing email development with mini framework, reducing templating effort by 30%.",
@@ -54,11 +64,11 @@ const experiences: Experience[] = [
   },
   {
     company: "Complile Inc.",
-    stack: [],
+    stack: ["Vue.js", "Django", "HTML5", "CSS3", "Javascript"],
     experience: [
       {
         designation: "Software Developer",
-        date: "Apr 2020 - Jun 2020 · 3 mos",
+        date: "Apr 2020 - Jun 2020",
         exp: [
           "Architected a frontend application for data visualization in the life sciences sector, increasing data platform adoption by 20%.",
         ],
@@ -67,11 +77,18 @@ const experiences: Experience[] = [
   },
   {
     company: "Impact Analytics",
-    stack: [],
+    stack: [
+      "React.js",
+      "Express.js",
+      "Postgresql",
+      "HTML5",
+      "CSS3",
+      "Javascript",
+    ],
     experience: [
       {
         designation: "Software Engineer",
-        date: "Jan 2019 - Mar 2020 · 1 yr 3 mos",
+        date: "Jan 2019 - Mar 2020",
         exp: [
           "Engineered full-stack applications (React.js, Node.js) for Retail Allocation, enhancing data consistency and UX by 22% via Redux.",
           "Designed & implemented APIs (Node.js, Express, PostgreSQL), optimizing backend performance and reducing latency by 15%.",
@@ -82,11 +99,11 @@ const experiences: Experience[] = [
   },
   {
     company: "Tata Consultancy Services",
-    stack: [],
+    stack: ["Angular 4", "Springboot", "Java", "HTML5", "CSS3", "Javascript"],
     experience: [
       {
         designation: "Assistant Systems Enginner",
-        date: "Jul 2017 - Jan 2019 · 1 yr 7 mos",
+        date: "Jul 2017 - Jan 2019",
         exp: [
           "Engineered Java/Spring Boot applications, including requirements analysis, design, development, and unit testing, delivering 5+ critical modules on schedule.",
           "Gained experience with Angular 4+ for UI development and developed applications using the MEAN stack.",
@@ -108,9 +125,12 @@ export const Experience = () => {
           <h4 className="text-xl font-semibold mb-2">{experience?.company}</h4>
           {experience?.experience?.map((exp, expIndex) => {
             return (
-              <div key={`experience-${experience?.company}-exp-${expIndex}`}>
+              <div
+                className={expIndex > 0 ? "mt-2" : ""}
+                key={`experience-${experience?.company}-exp-${expIndex}`}
+              >
                 <div className="flex gap-2 items-start">
-                  <div className="rounded-full bg-[var(--secondary)] border-1 border-color-[var(--secondary-foreground)] p-2">
+                  <div className="rounded-full bg-[var(--secondary)] border-1 p-2">
                     <IconCode size={14} color="var(--secondary-foreground)" />
                   </div>
                   <div className="flex flex-col pr-2">
@@ -118,7 +138,7 @@ export const Experience = () => {
                       {exp?.designation}
                     </p>
                     <p className="text-xs italic">{exp?.date}</p>
-                    <ul className="-mt-1.25 -ml-6 pt-1.75 pl-4 pb-2 border-l-1 border-color-[var(--secondary-foreground)]">
+                    <ul className="-mt-1.25 -ml-6 pt-1.75 pl-4 border-l-1">
                       {exp?.exp?.map((e, ei) => {
                         return (
                           <li
@@ -136,6 +156,23 @@ export const Experience = () => {
               </div>
             );
           })}
+          {Array?.isArray(experience?.stack) &&
+          experience?.stack?.length > 0 ? (
+            <div className="pt-2 mt-2 ml-7 flex flex-wrap items-center gap-2">
+              {experience?.stack?.map((stack, stackIndex) => {
+                return (
+                  <div
+                    className="p-1.5 rounded-lg text-xs text-[var(--secondary-foreground)] bg-[var(--secondary)]"
+                    key={`${experience?.company}-stack-${stackIndex}`}
+                  >
+                    {stack}
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
       </section>
     );
