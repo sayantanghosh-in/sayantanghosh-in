@@ -1,30 +1,42 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a192f;
-  --foreground: #ccd6f6;
-  --color-navy-dark: #112240;
-  --color-slate-medium: #8892b0;
-  --color-green-accent: #64ffda;
-  --color-green-accent-dark: #3b82f6;
+  --background: lab(100% 0 0);
+  --foreground: lab(2.51107% 0.242703 -0.886115);
+  --primary: lab(2.51107% 0.242703 -0.886115);
+  --primary-foreground: lab(98.26% 0 0);
+  --secondary: lab(96.1634% 0.0993311 -0.364041);
+  --secondary-foreground: lab(2.51107% 0.242703 -0.886115);
+  --muted: lab(96.1634% 0.0993311 -0.364041);
+  --muted-foreground: lab(47.8878% 1.65477 -5.77283);
+  --card: lab(100% 0 0);
+  --card-foreground: lab(2.51107% 0.242703 -0.886115);
+  --popover: lab(100% 0 0);
+  --popover-foreground: lab(2.51107% 0.242703 -0.886115);
+  --accent: lab(96.1634% 0.0993311 -0.364041);
+  --accent-foreground: lab(8.30603% 0.618205 -2.16572);
+  --border: lab(72.94% 0 -0.01);
+  --edge: color-mix(in oklab, var(--border) 50%, var(--background));
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: var(--foreground);
+    --foreground: var(--background);
   }
+}
+
+* {
+  border-color: var(--edge);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
 }

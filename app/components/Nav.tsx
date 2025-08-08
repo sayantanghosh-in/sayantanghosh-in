@@ -1,35 +1,58 @@
-"use client";
+import {
+  IconBrandGithub,
+  IconBrandLinkedin,
+  IconBrandTwitter,
+} from "@tabler/icons-react";
 import Link from "next/link";
 
 export const Nav = () => {
   return (
-    <nav>
-      <ul className="mt-4 md:mt-16">
+    <nav className="border-x-1 px-2">
+      <ul className="flex flex-row gap-4 items-center justify-end">
         <li>
           <Link
-            href="#about"
-            className="w-fit py-2 flex items-center gap-2 group"
+            href="https://sayantanghosh.in"
+            className="text-sm text-[var(--accent-foreground)]"
           >
-            <span className="navigation-marker w-8 h-px bg-[var(--color-navy-dark)] group-hover:bg-foreground group-hover:w-12 transition-all duration-2s" />
-            <span>About</span>
+            Home
           </Link>
         </li>
         <li>
           <Link
-            href="#experience"
-            className="w-fit py-2 flex items-center gap-2 group"
+            href="https://sayantanghosh.in/blog"
+            className="text-sm text-[var(--accent-foreground)]"
           >
-            <span className="navigation-marker w-8 h-px bg-[var(--color-navy-dark)] group-hover:bg-foreground group-hover:w-12 transition-all duration-2s" />
-            <span>Experience</span>
+            Blog
           </Link>
         </li>
         <li>
           <Link
-            href="#projects"
-            className="w-fit py-2 flex items-center gap-2 group"
+            target="_blank"
+            href="https://www.linkedin.com/in/sayantanghosh-in"
           >
-            <span className="navigation-marker w-8 h-px bg-[var(--color-navy-dark)] group-hover:bg-foreground group-hover:w-12 transition-all duration-2s" />
-            <span>Projects</span>
+            <IconBrandLinkedin
+              size={16}
+              stroke={1.5}
+              color="var(--accent-foreground)"
+            />
+          </Link>
+        </li>
+        <li>
+          <Link target="_blank" href="https://x.com/sayantan__ghosh">
+            <IconBrandTwitter
+              size={16}
+              stroke={1.5}
+              color="var(--accent-foreground)"
+            />
+          </Link>
+        </li>
+        <li>
+          <Link target="_blank" href="https://github.com/sayantanghosh-in">
+            <IconBrandGithub
+              size={16}
+              stroke={1.5}
+              color="var(--accent-foreground)"
+            />
           </Link>
         </li>
       </ul>
