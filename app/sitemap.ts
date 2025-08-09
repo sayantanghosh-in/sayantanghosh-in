@@ -14,14 +14,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogRoutes = blogPosts.map((post) => ({
     url: `${BASE_URL}/blog/${post.slug}`,
     lastModified: post.lastModified,
-    changeFrequency: "weekly" as "weekly",
+    changeFrequency: "weekly" as const,
     priority: 0.8,
   }));
 
   const staticRoutes = ["", "/blog"].map((route) => ({
     url: `${BASE_URL}${route}`,
     lastModified: new Date(),
-    changeFrequency: "monthly" as "monthly",
+    changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
 
