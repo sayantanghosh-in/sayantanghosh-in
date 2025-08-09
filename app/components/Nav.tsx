@@ -25,6 +25,7 @@ export const Nav = () => {
         <li>
           <Link
             target="_blank"
+            aria-label="Sayantan Ghosh Linkedin"
             href="https://www.linkedin.com/in/sayantanghosh-in"
           >
             <IconBrandLinkedin
@@ -35,7 +36,11 @@ export const Nav = () => {
           </Link>
         </li>
         <li>
-          <Link target="_blank" href="https://x.com/sayantan__ghosh">
+          <Link
+            aria-label="Sayantan Ghosh Twitter / X"
+            target="_blank"
+            href="https://x.com/sayantan__ghosh"
+          >
             <IconBrandTwitter
               size={16}
               stroke={1.5}
@@ -44,7 +49,11 @@ export const Nav = () => {
           </Link>
         </li>
         <li>
-          <Link target="_blank" href="https://github.com/sayantanghosh-in">
+          <Link
+            aria-label="Sayantan Ghosh Github"
+            target="_blank"
+            href="https://github.com/sayantanghosh-in"
+          >
             <IconBrandGithub
               size={16}
               stroke={1.5}

@@ -31,9 +31,9 @@ export default function Home() {
               <h1 className="border-t-1 pt-2 pl-2 text-3xl font-semibold">
                 Sayantan Ghosh
               </h1>
-              <h6 className="border-t-1 mt-0.25 pt-1.25 pl-2 pb-1.25 text-sm text-[var(--accent-foreground)]">
+              <h2 className="border-t-1 mt-0.25 pt-1.25 pl-2 pb-1.25 text-sm text-[var(--accent-foreground)]">
                 Frontend Developer
-              </h6>
+              </h2>
             </div>
           </div>
         </section>

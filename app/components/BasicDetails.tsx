@@ -27,7 +27,7 @@ export const BasicDetails = () => {
         className="text-sm text-[var(--accent-foreground)] flex gap-1.25 items-center"
       >
         <IconWorld size={16} color="var(--accent-foreground)" stroke={1.5} />{" "}
-        www.sayantanghosh.in
+        https://sayantanghosh.in
       </Link>
       <Link
         href="tel:+917697505444"
