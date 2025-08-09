@@ -122,7 +122,7 @@ export const Experience = () => {
         className="border-t-1 px-2 md:px-32 lg:px-96"
       >
         <div className="border-x-1 p-2">
-          <h4 className="text-xl font-semibold mb-2">{experience?.company}</h4>
+          <h3 className="text-xl font-semibold mb-2">{experience?.company}</h3>
           {experience?.experience?.map((exp, expIndex) => {
             return (
               <div
