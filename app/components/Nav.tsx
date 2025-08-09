@@ -10,14 +10,17 @@ export const Nav = () => {
     <nav className="border-x-1 px-2">
       <ul className="flex flex-row gap-4 items-center justify-end">
         <li>
-          <Link href="/" className="text-sm text-[var(--accent-foreground)]">
+          <Link
+            href="/"
+            className="text-md md:text-sm text-[var(--accent-foreground)]"
+          >
             Home
           </Link>
         </li>
         <li>
           <Link
             href="/blog"
-            className="text-sm text-[var(--accent-foreground)]"
+            className="text-md md:text-sm text-[var(--accent-foreground)]"
           >
             Blog
           </Link>
@@ -29,7 +32,7 @@ export const Nav = () => {
             href="https://www.linkedin.com/in/sayantanghosh-in"
           >
             <IconBrandLinkedin
-              size={16}
+              className="w-[24px] h-[24px] md:w-[16px] md:h-[16px]"
               stroke={1.5}
               color="var(--accent-foreground)"
             />
@@ -42,7 +45,7 @@ export const Nav = () => {
             href="https://x.com/sayantan__ghosh"
           >
             <IconBrandTwitter
-              size={16}
+              className="w-[24px] h-[24px] md:w-[16px] md:h-[16px]"
               stroke={1.5}
               color="var(--accent-foreground)"
             />
@@ -55,7 +58,7 @@ export const Nav = () => {
             href="https://github.com/sayantanghosh-in"
           >
             <IconBrandGithub
-              size={16}
+              className="w-[24px] h-[24px] md:w-[16px] md:h-[16px]"
               stroke={1.5}
               color="var(--accent-foreground)"
             />
