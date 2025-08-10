@@ -7,18 +7,21 @@ Base URL (local): `http://localhost:3000`
 ## 📂 GET `/api/expenses/monthly`
 
 ### 🔹 Description:
+
 Fetches all expenses that were updated in the **current month**.
 
 ### ✅ Method:
+
 `GET`
 
 ### 🔄 Response (200 OK):
+
 ```json
 {
   "data": [
     {
       "id": 4,
-      "description": "Medicine Maa Cilacarx2 + Prolometx3",
+      "description": "Medicine for Maa",
       "amount": 902,
       "updated_at": "2025-05-03T17:23:35.976267+00:00",
       "expense_category": 11
@@ -35,6 +38,7 @@ Fetches all expenses that were updated in the **current month**.
 ```
 
 ### ❗ Errors:
+
 - `500 Internal Server Error` – When Supabase query fails.
 
 ---
@@ -42,12 +46,15 @@ Fetches all expenses that were updated in the **current month**.
 ## 📂 GET `/api/expenses-category/all`
 
 ### 🔹 Description:
+
 Returns **all predefined expense categories**.
 
 ### ✅ Method:
+
 `GET`
 
 ### 🔄 Response (200 OK):
+
 ```json
 {
   "data": [
@@ -55,14 +62,14 @@ Returns **all predefined expense categories**.
       "id": 1,
       "title": "Rent",
       "description": "Rental expense for Bengaluru house",
-      "max_amount_per_month": 31000,
+      "max_amount_per_month": 67000,
       "updated_at": "2025-05-03T16:55:17.412873+00:00"
     },
     {
       "id": 2,
       "title": "Home Loan",
-      "description": "Home loan expense for Konnagar flat (312 + 17900)",
-      "max_amount_per_month": 18212,
+      "description": "Home loan expense for Konnagar flat (700 + 23300)",
+      "max_amount_per_month": 24000,
       "updated_at": "2025-05-03T16:57:42.622243+00:00"
     }
   ]
@@ -70,11 +77,13 @@ Returns **all predefined expense categories**.
 ```
 
 ### ❗ Errors:
+
 - `500 Internal Server Error` – When fetching fails or returns null.
 
 ---
 
 ## 🛠 Notes:
+
 - API is built using **Next.js App Router API routes**.
 - Data is served from **Supabase**.
 - Filtering logic for `/expenses/monthly` is handled server-side using date matching.

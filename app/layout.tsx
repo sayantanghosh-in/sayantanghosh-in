@@ -28,6 +28,12 @@ export const metadata: Metadata = {
   keywords: [
     "Sayantan",
     "Ghosh",
+    "India",
+    "Bengaluru",
+    "Bangalore",
+    "Sayantan Ghosh India",
+    "Sayantan Ghosh Bengaluru",
+    "Sayantan Ghosh Bangalore",
     "Front end",
     "Developer",
     "Engineer",
@@ -41,6 +47,15 @@ export const metadata: Metadata = {
     "Vibe Coding",
     "Google Prompting Essentials",
   ],
+  twitter: {
+    card: "summary_large_image",
+    title: "Sayantan Ghosh",
+    description:
+      "My name is Sayantan Ghosh. I am a front end engineer specializing in React.JS, Typescript, Next.JS and various other technologies like Express.JS, Node.JS, PostgreSQL, etc.",
+    site: "@sayantan__ghosh",
+    creator: "@sayantan__ghosh",
+    images: ["https://sayantanghosh.in/sayantan.png"],
+  },
 };
 
 export default function RootLayout({
