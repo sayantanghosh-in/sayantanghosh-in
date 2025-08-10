@@ -1,6 +1,7 @@
 export const allowedOrigins = [
   "http://localhost:5173",
-  "https://gotodash.vercel.app",
+  "https://sayantanghosh.in",
+  "https://*.sayantanghosh.in",
 ];
 
 // Helper to build proper CORS headers
