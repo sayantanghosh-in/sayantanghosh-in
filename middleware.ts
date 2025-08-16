@@ -17,5 +17,5 @@ export function middleware(req: NextRequest) {
 
 // 👇 matcher decides which routes are protected
 export const config = {
-  matcher: ["/api/expenses/:path*"],
+  matcher: ["/api/expenses/:path*", "/api/expenses-category/:path*"],
 };
