@@ -21,14 +21,20 @@ export async function GET(req: NextRequest) {
   const { data, error } = await supabase.rpc("get_expenses_category_goal");
 
   if (error) {
-    return NextResponse.json(JSON.stringify({ error: error.message }), {
-      status: 500,
-      headers,
-    });
+    return NextResponse.json(
+      { error: error.message },
+      {
+        status: 500,
+        headers,
+      }
+    );
   }
 
-  return NextResponse.json(JSON.stringify({ data }), {
-    status: 200,
-    headers,
-  });
+  return NextResponse.json(
+    { data },
+    {
+      status: 200,
+      headers,
+    }
+  );
 }

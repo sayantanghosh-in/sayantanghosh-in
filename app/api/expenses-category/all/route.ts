@@ -20,10 +20,13 @@ export async function GET(req: NextRequest) {
 
   if (error) {
     console.error("RPC error:", error.message);
-    return NextResponse.json(JSON.stringify({ error: error.message }), {
-      status: 500,
-      headers,
-    });
+    return NextResponse.json(
+      { error: error.message },
+      {
+        status: 500,
+        headers,
+      }
+    );
   }
 
   return NextResponse.json({ data }, { status: 200, headers });
