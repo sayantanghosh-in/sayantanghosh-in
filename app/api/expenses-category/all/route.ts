@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
 
   if (error) {
     console.error("RPC error:", error.message);
-    return new NextResponse(JSON.stringify({ error: error.message }), {
+    return NextResponse.json(JSON.stringify({ error: error.message }), {
       status: 500,
       headers,
     });
