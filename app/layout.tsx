@@ -24,9 +24,9 @@ export const metadata: Metadata = {
     siteName: "Sayantan Ghosh",
     images: [
       {
-        url: "https://sayantanghosh.in/banner.png",
-        width: 943,
-        height: 221,
+        url: "https://sayantanghosh.in/sayantan.png",
+        width: 320,
+        height: 320,
         alt: "Sayantan Ghosh Website Open Graph Image",
       },
     ],
@@ -63,7 +63,7 @@ export const metadata: Metadata = {
       "My name is Sayantan Ghosh. I am a front end engineer specializing in React.JS, Typescript, Next.JS and various other technologies like Express.JS, Node.JS, PostgreSQL, etc.",
     site: "@sayantan__ghosh",
     creator: "@sayantan__ghosh",
-    images: ["https://sayantanghosh.in/banner.png"],
+    images: ["https://sayantanghosh.in/sayantan.png"],
   },
 };
 
