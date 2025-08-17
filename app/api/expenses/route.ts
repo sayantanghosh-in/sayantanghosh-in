@@ -3,7 +3,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 import { getCorsHeaders } from "@/lib/cors";
 
-// Handle CORS preflight
+// Preflight handler
 export async function OPTIONS(req: NextRequest) {
   const origin = req.headers.get("origin") || "";
   const headers = getCorsHeaders(origin, "DELETE, GET, OPTIONS, POST, PUT");
