@@ -6,6 +6,7 @@ import { BasicDetails } from "./components/BasicDetails";
 import { Experience } from "./components/Experience";
 import { About } from "./components/About";
 import { Button } from "@/components/ui/button";
+import { Projects } from "./components/Projects";
 import { Social } from "./components/Social";
 
 export default function Home() {
@@ -52,6 +53,7 @@ export default function Home() {
       <section className="border-t-1 px-2 md:px-32 lg:px-96">
         <h2 className="text-2xl font-semibold">Projects</h2>
       </section>
+      <Projects />
       <section className="border-t-1 px-2 md:px-32 lg:px-96">
         <div className="border-x-1 px-2 flex justify-center py-2">
           <Button asChild>
