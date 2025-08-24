@@ -52,9 +52,9 @@ export const Projects = () => {
               return (
                 <div
                   key={`project-${project?.id}-highlight-${highlightIndex}`}
-                  className="text-sm flex items-center gap-1"
+                  className="text-sm flex items-start gap-1"
                 >
-                  <IconPoint size={12} />
+                  <IconPoint size={12} className="mt-1" />
                   <p className="w-[calc(100%-12px)]">{highlight}</p>
                 </div>
               );
