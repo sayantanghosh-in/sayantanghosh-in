@@ -19,7 +19,7 @@ export const Nav = () => {
         </li>
         <li>
           <Link
-            href="/blog"
+            href="https://sayantanghosh.in/blog"
             className="text-md md:text-sm text-[var(--accent-foreground)]"
           >
             Blog
@@ -53,9 +53,9 @@ export const Nav = () => {
         </li>
         <li>
           <Link
-            aria-label="Sayantan Ghosh Github"
+            aria-label="Sayantan Ghosh Portfolio Github"
             target="_blank"
-            href="https://github.com/sayantanghosh-in"
+            href="https://github.com/sayantanghosh-in/sayantanghosh-in"
           >
             <IconBrandGithub
               className="w-[24px] h-[24px] md:w-[16px] md:h-[16px]"
