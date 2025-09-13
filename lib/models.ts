@@ -9,7 +9,5 @@ export type Project = {
     blogPost: string;
     github: string;
     landingPage: string;
-    thumbnail: string;
-    videoEmbed: string;
   };
 };
