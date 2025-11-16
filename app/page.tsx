@@ -1,18 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Gradient } from "./components/Gradient";
-import { BasicDetails } from "./components/BasicDetails";
-import { Experience } from "./components/Experience";
-import { About } from "./components/About";
+import { Gradient } from "@/components/Gradient";
+import { BasicDetails } from "@/components/BasicDetails";
+import { Experience } from "@/components/Experience";
+import { About } from "@/components/About";
 import { Button } from "@/components/ui/button";
-import { Projects } from "./components/Projects";
-import { Social } from "./components/Social";
+import { Projects } from "@/components/Projects";
+import { Social } from "@/components/Social";
+import { Blogs } from "@/components/Blogs";
 
 export default function Home() {
   return (
     <div>
-      <section className="px-2 md:px-32 lg:px-96">
+      <section className="px-2 md:px-32 lg:px-80">
         <div className="flex items-center gap-0.25 border-x-1">
           <Image
             alt="Sayantan Ghosh Photo"
@@ -33,28 +34,28 @@ export default function Home() {
         </div>
       </section>
       <Gradient additionalClass="border-t-1" />
-      <section className="border-t-1 px-2 md:px-32 lg:px-96">
+      <section className="border-t-1 px-2 md:px-32 lg:px-80">
         <BasicDetails />
       </section>
       <Gradient additionalClass="border-t-1" />
-      <section className="border-t-1 px-2 md:px-32 lg:px-96">
+      <section className="border-t-1 px-2 md:px-32 lg:px-80">
         <About />
       </section>
       <Gradient additionalClass="border-t-1" />
-      <section className="border-t-1 px-2 md:px-32 lg:px-96">
+      <section className="border-t-1 px-2 md:px-32 lg:px-80">
         <Social />
       </section>
       <Gradient additionalClass="border-t-1" />
-      <section className="border-t-1 px-2 md:px-32 lg:px-96">
+      <section className="border-t-1 px-2 md:px-32 lg:px-80">
         <h2 className="text-2xl font-semibold">Experience</h2>
       </section>
       <Experience />
       <Gradient additionalClass="border-t-1" />
-      <section className="border-t-1 px-2 md:px-32 lg:px-96">
+      <section className="border-t-1 px-2 md:px-32 lg:px-80">
         <h2 className="text-2xl font-semibold">Projects</h2>
       </section>
       <Projects />
-      <section className="border-t-1 px-2 md:px-32 lg:px-96">
+      <section className="border-t-1 px-2 md:px-32 lg:px-80">
         <div className="border-x-1 px-2 flex justify-center py-2">
           <Button asChild>
             <Link target="_blank" href="https://github.com/sayantanghosh-in">
@@ -64,10 +65,11 @@ export default function Home() {
         </div>
       </section>
       <Gradient additionalClass="border-t-1" />
-      <section className="border-t-1 px-2 md:px-32 lg:px-96">
-        <h2 className="text-2xl font-semibold">Blog</h2>
+      <section className="border-t-1 px-2 md:px-32 lg:px-80">
+        <h2 className="text-2xl font-semibold">Blog Posts</h2>
       </section>
-      <section className="border-t-1 px-2 md:px-32 lg:px-96">
+      <Blogs max={3} />
+      <section className="border-t-1 px-2 md:px-32 lg:px-80">
         <div className="border-x-1 px-2 flex justify-center py-2">
           <Button asChild>
             <Link href="/blog">Show all Posts</Link>

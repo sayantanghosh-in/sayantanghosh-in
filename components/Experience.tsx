@@ -119,7 +119,7 @@ export const Experience = () => {
     return (
       <section
         key={experience?.company}
-        className="border-t-1 px-2 md:px-32 lg:px-96"
+        className="border-t-1 px-2 md:px-32 lg:px-80"
       >
         <div className="border-x-1 p-2">
           <h3 className="text-xl font-semibold mb-2">{experience?.company}</h3>

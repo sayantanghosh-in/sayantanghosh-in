@@ -10,7 +10,7 @@ import { projects } from "@/lib/constants";
 export const Projects = () => {
   return projects?.map((project) => {
     return (
-      <section key={project?.id} className="border-t-1 px-2 md:px-32 lg:px-96">
+      <section key={project?.id} className="border-t-1 px-2 md:px-32 lg:px-80">
         <div className="border-x-1 p-2">
           <h3 className="text-lg font-semibold mb-0.5 underline flex items-center gap-1 max-w-[150px] text-wrap break-all">
             <Link href={project?.urls?.landingPage}>{project?.title}</Link>
