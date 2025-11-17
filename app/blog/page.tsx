@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { Gradient } from "@/components/Gradient";
 import { Blogs } from "@/components/Blogs";
@@ -24,6 +25,18 @@ export default function BlogListPage() {
               Frontend Developer
             </h2>
           </div>
+        </div>
+      </section>
+      <Gradient additionalClass="border-t-1" />
+      <section className="border-t-1 px-2 md:px-32 lg:px-80">
+        <div className="flex gap-2 items-center border-x-1 p-2 text-xs text-gray-500">
+          <Link href="/" className="hover:underline">
+            Home
+          </Link>
+          &gt;
+          <Link href="/blog" className="text-black-500 font-bold">
+            Blog Posts
+          </Link>
         </div>
       </section>
       <Gradient additionalClass="border-t-1" />
