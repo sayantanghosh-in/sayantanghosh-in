@@ -64,7 +64,7 @@ export default async function PostPage(props: PostPageProps) {
         <h1 className="text-2xl font-bold text-center text-gray-800 border-x-1 p-2">
           {postData.title}
         </h1>
-        <Gradient additionalClass="border-1" />
+        <Gradient additionalClass="border-1" heightClass="h-1" />
         <div className="text-gray-500 border-x-1 p-2">
           <p className="text-xs">
             <b>{postData.author}</b> &bull;{" "}
