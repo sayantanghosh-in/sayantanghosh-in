@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   // Allow all OPTIONS requests to pass through without authentication check
   if (req.method === "OPTIONS") {
     return NextResponse.next();

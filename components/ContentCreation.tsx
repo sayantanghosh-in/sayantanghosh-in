@@ -30,6 +30,7 @@ export const ContentCreation = () => {
             src="/the-dev-guide-logo.png"
             alt="the-dev-guide-logo"
             width={48}
+            height={48}
           />
           <div>
             <h2 className="text-blue-800">TheDevGuide</h2>
