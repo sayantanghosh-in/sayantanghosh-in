@@ -1,4 +1,4 @@
-import { Project } from "./models";
+import { Content, Project } from "./models";
 
 export const FE_DATE_FORMAT = "MMM yyyy";
 export const projects: Project[] = [
@@ -41,5 +41,23 @@ export const projects: Project[] = [
       github: "https://github.com/sayantanghosh-in/gotodash",
       landingPage: "https://gotodash.sayantanghosh.in",
     },
+  },
+];
+
+export const contentCreation: Content[] = [
+  {
+    id: "facebook",
+    label: "/TheDevGuide",
+    url: "https://wwww.facebook.com/TheDevGuide",
+  },
+  {
+    id: "instagram",
+    label: "/the.dev.guide",
+    url: "https://www.instagram.com/the.dev.guide",
+  },
+  {
+    id: "youtube",
+    label: "/@TheDevGuideYt",
+    url: "https://www.youtube.com/@TheDevGuideYt",
   },
 ];

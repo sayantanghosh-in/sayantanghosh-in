@@ -5,10 +5,11 @@ import { Gradient } from "@/components/Gradient";
 import { BasicDetails } from "@/components/BasicDetails";
 import { Experience } from "@/components/Experience";
 import { About } from "@/components/About";
+import { Blogs } from "@/components/Blogs";
 import { Button } from "@/components/ui/button";
+import { ContentCreation } from "@/components/ContentCreation";
 import { Projects } from "@/components/Projects";
 import { Social } from "@/components/Social";
-import { Blogs } from "@/components/Blogs";
 
 export default function Home() {
   return (
@@ -45,6 +46,11 @@ export default function Home() {
       <section className="border-t-1 px-2 md:px-32 lg:px-80">
         <Social />
       </section>
+      <Gradient additionalClass="border-t-1" />
+      <section className="border-t-1 px-2 md:px-32 lg:px-80">
+        <h2 className="text-2xl font-semibold">Content Creation</h2>
+      </section>
+      <ContentCreation />
       <Gradient additionalClass="border-t-1" />
       <section className="border-t-1 px-2 md:px-32 lg:px-80">
         <h2 className="text-2xl font-semibold">Experience</h2>

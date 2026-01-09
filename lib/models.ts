@@ -11,3 +11,9 @@ export type Project = {
     landingPage: string;
   };
 };
+
+export type Content = {
+  id: string;
+  label: string;
+  url: string;
+};
