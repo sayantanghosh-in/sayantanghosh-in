@@ -82,6 +82,7 @@ export default async function PostPage(props: PostPageProps) {
         <div
           className="prose prose-sm max-w-none border-x-1 p-2"
           dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
+          suppressHydrationWarning
         />
       </section>
     </div>

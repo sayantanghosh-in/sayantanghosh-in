@@ -2,7 +2,9 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { remark } from "remark";
-import html from "remark-html";
+import remarkRehype from "remark-rehype";
+import rehypeRaw from "rehype-raw";
+import rehypeStringify from "rehype-stringify";
 
 // Define the type for the frontmatter metadata
 export type PostData = {
@@ -87,8 +89,14 @@ export async function getPostContent(slug: string): Promise<PostContent> {
   // Use gray-matter to parse the post metadata section
   const { data, content } = matter(fileContents);
 
-  // Use remark to convert markdown into an HTML string
-  const processedContent = await remark().use(html).process(content);
+  // Using remark-rehype pipeline to convert markdown into an HTML string
+  // This pipeline specifically supports raw HTML tags (like <img>) inside markdown
+  const processedContent = await remark()
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeRaw)
+    .use(rehypeStringify)
+    .process(content);
+
   const contentHtml = processedContent.toString();
 
   // Combine the data, slug, and contentHtml and return
