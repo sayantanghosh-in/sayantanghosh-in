@@ -28,8 +28,20 @@ const experiences: Experience[] = [
     ],
     experience: [
       {
+        designation: "Tech Lead",
+        date: "Jun 2026 - Present",
+        exp: [
+          "Spearheaded ideation, research, and end-to-end delivery of an AI agent-powered product line as Tech Lead, unlocking a new revenue stream and improving customer retention.",
+          "Architected and built Model Context Protocol (MCP) servers, integrating internal and third-party MCP servers to extend AI agent tool-calling capabilities across the platform.",
+          "Expanded into backend engineering with Python, FastAPI, and PostgreSQL, designing and shipping scalable services that power AI-driven product features.",
+          "Designed and led company-wide adoption of a custom-built JIRA alternative (React, FastAPI, PostgreSQL, Redis, Kafka, Elasticsearch), eliminating third-party licensing costs and saving ~$1,000/month.",
+          "Engineered Elasticsearch-powered JQL search, real-time notifications, sprint planning, and performance-scoring modules, driving higher team engagement and faster ticket resolution.",
+          "Built a native MCP server for the internal platform, enabling engineers to manage tickets directly through Claude Code and streamlining developer workflows.",
+        ],
+      },
+      {
         designation: "Senior Software Engineer",
-        date: "Oct 2022 - Present",
+        date: "Oct 2022 - May 2026",
         exp: [
           "Led UI development for new marketing products; mentored a team of junior developers and improved onboarding efficiency by ~25%.",
           "Standardized UI components with private npm package & Storybook, reducing customer churn by 15% with better UX predictability.",

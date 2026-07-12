@@ -16,7 +16,7 @@ export const BasicDetails = () => {
           color="var(--accent-foreground)"
           stroke={1.5}
         />{" "}
-        Senior Software Engineer at <span className="font-semibold">Synup</span>
+        Tech Lead at <span className="font-semibold">Synup</span>
       </p>
       <p className="text-sm text-[var(--accent-foreground)] flex gap-1.25 items-center">
         <IconMapPin size={16} color="var(--accent-foreground)" stroke={1.5} />{" "}

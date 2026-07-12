@@ -2,11 +2,12 @@ export const About = () => {
   return (
     <div className="flex flex-col gap-2 border-x-1 p-2">
       <p className="text-sm">
-        As a Senior Software Engineer, I specialize in crafting robust and
-        intuitive user experiences with{" "}
+        As a Tech Lead, I specialize in leading teams and guiding teams. I am a
+        specialist in crafting robust and intuitive user experiences with{" "}
         <span className="font-bold">React.js</span>,{" "}
-        <span className="font-bold">TypeScript</span>, and{" "}
-        <span className="font-bold">Next.js</span>. My expertise extends to the
+        <span className="font-bold">TypeScript</span>{" "}
+        <span className="font-bold">Next.js</span>, and{" "}
+        <span className="font-bold">FastAPI</span>. My expertise extends to the
         backend with <span className="font-bold">Express</span> and database
         solutions like <span className="font-bold">PostgreSQL</span> and{" "}
         <span className="font-bold">Supabase</span>, enabling me to build
