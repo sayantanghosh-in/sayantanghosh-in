@@ -1,87 +1,60 @@
-import Image from "next/image";
-import Link from "next/link";
+import type { Metadata } from "next";
 
-import { Gradient } from "@/components/Gradient";
-import { BasicDetails } from "@/components/BasicDetails";
 import { Experience } from "@/components/Experience";
-import { About } from "@/components/About";
-import { Blogs } from "@/components/Blogs";
-import { Button } from "@/components/ui/button";
-import { ContentCreation } from "@/components/ContentCreation";
+import { Hero } from "@/components/Hero";
+import { ImpactStrip } from "@/components/ImpactStrip";
+import { Marquee } from "@/components/site/Marquee";
 import { Projects } from "@/components/Projects";
-import { Social } from "@/components/Social";
+import { Writing } from "@/components/Writing";
+import { SITE, SOCIALS } from "@/lib/site";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: SITE.name,
+  url: SITE.url,
+  email: `mailto:${SITE.email}`,
+  jobTitle: "Tech Lead",
+  description: SITE.description,
+  worksFor: { "@type": "Organization", name: "Synup" },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Bengaluru",
+    addressCountry: "IN",
+  },
+  knowsAbout: [
+    "AI agents",
+    "LangGraph",
+    "LangChain",
+    "Retrieval-augmented generation",
+    "Model Context Protocol",
+    "LLM evaluation",
+    "React",
+    "TypeScript",
+    "Next.js",
+    "FastAPI",
+    "PostgreSQL",
+  ],
+  sameAs: Object.values(SOCIALS),
+};
 
 export default function Home() {
   return (
-    <div>
-      <section className="px-2 md:px-32 lg:px-80">
-        <div className="flex items-center gap-0.25 border-x-1">
-          <Image
-            alt="Sayantan Ghosh Photo"
-            src="/sayantan.png"
-            width={90}
-            height={90}
-            className="w-[90px] h-[90px] md:w-[130px] md:h-[130px] lg:w-[160px] lg:h-[160px] rounded-full"
-          />
-          <div className="w-full flex flex-col justify-start border-l-1">
-            <Gradient heightClass="h-6 md:h-16 lg:h-24" />
-            <h1 className="border-t-1 pt-2 pl-2 text-3xl font-semibold">
-              Sayantan Ghosh
-            </h1>
-            <h2 className="border-t-1 mt-0.25 pt-1.25 pl-2 pb-1.25 text-sm text-[var(--accent-foreground)]">
-              Frontend Developer
-            </h2>
-          </div>
-        </div>
-      </section>
-      <Gradient additionalClass="border-t-1" />
-      <section className="border-t-1 px-2 md:px-32 lg:px-80">
-        <BasicDetails />
-      </section>
-      <Gradient additionalClass="border-t-1" />
-      <section className="border-t-1 px-2 md:px-32 lg:px-80">
-        <About />
-      </section>
-      <Gradient additionalClass="border-t-1" />
-      <section className="border-t-1 px-2 md:px-32 lg:px-80">
-        <Social />
-      </section>
-      <Gradient additionalClass="border-t-1" />
-      <section className="border-t-1 px-2 md:px-32 lg:px-80">
-        <h2 className="text-2xl font-semibold">Content Creation</h2>
-      </section>
-      <ContentCreation />
-      <Gradient additionalClass="border-t-1" />
-      <section className="border-t-1 px-2 md:px-32 lg:px-80">
-        <h2 className="text-2xl font-semibold">Experience</h2>
-      </section>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+      />
+      <Hero />
+      <ImpactStrip />
       <Experience />
-      <Gradient additionalClass="border-t-1" />
-      <section className="border-t-1 px-2 md:px-32 lg:px-80">
-        <h2 className="text-2xl font-semibold">Projects</h2>
-      </section>
+      <Marquee />
       <Projects />
-      <section className="border-t-1 px-2 md:px-32 lg:px-80">
-        <div className="border-x-1 px-2 flex justify-center py-2">
-          <Button asChild>
-            <Link target="_blank" href="https://github.com/sayantanghosh-in">
-              Show all Projects
-            </Link>
-          </Button>
-        </div>
-      </section>
-      <Gradient additionalClass="border-t-1" />
-      <section className="border-t-1 px-2 md:px-32 lg:px-80">
-        <h2 className="text-2xl font-semibold">Blog Posts</h2>
-      </section>
-      <Blogs max={3} />
-      <section className="border-t-1 px-2 md:px-32 lg:px-80">
-        <div className="border-x-1 px-2 flex justify-center py-2">
-          <Button asChild>
-            <Link href="/blog">Show all Posts</Link>
-          </Button>
-        </div>
-      </section>
-    </div>
+      <Writing />
+    </>
   );
 }

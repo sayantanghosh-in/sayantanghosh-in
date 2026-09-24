@@ -1,0 +1,143 @@
+/* ============================================================================
+ * THEME
+ * ----------------------------------------------------------------------------
+ * Everything visual lives here. Change these values and the whole site
+ * re-skins — nothing outside this file hard-codes a colour, a font or a
+ * duration.
+ *
+ * Colours are oklch(lightness chroma hue):
+ *   lightness  0 = black, 1 = white
+ *   chroma     0 = grey, ~0.2 = vivid
+ *   hue        0-360 degrees. 40-90 is warm, 140-180 green, 240-280 blue
+ *
+ * To re-theme, the shortest path is:
+ *   1. pick a new --accent hue
+ *   2. match the hue on the surface and ink tokens (they carry a little of it)
+ *   3. check contrast — see the note on --accent-ink below
+ * ==========================================================================*/
+
+:root {
+  color-scheme: light;
+
+  /* --- Surfaces -----------------------------------------------------------
+   * Warm paper rather than pure white. The slight chroma is what stops the
+   * page looking clinical; drop it to 0 for a neutral grey theme. */
+  --bg: oklch(0.977 0.011 85);
+  --bg-elev: oklch(0.992 0.007 85); /* cards, raised panels */
+  --bg-band: oklch(0.951 0.015 85); /* alternating bands, code, inputs */
+
+  /* --- Ink ----------------------------------------------------------------
+   * Three steps, never more. fg for headings and body, fg-2 for supporting
+   * copy, fg-3 for metadata. If you need a fourth step, the layout is wrong. */
+  --fg: oklch(0.205 0.02 60);
+  --fg-2: oklch(0.44 0.018 60);
+  /* 4.59:1 on --bg-band, the darkest light surface it sits on. Do not
+   * lighten: 0.585 was 3.65:1 there and failed AA for the 11px eyebrow. */
+  --fg-3: oklch(0.53 0.015 60);
+
+  /* --- Hairlines ----------------------------------------------------------
+   * The rails and dividers that give the site its structure. */
+  --line: oklch(0.885 0.016 85);
+  --line-hi: oklch(0.82 0.022 85); /* hover / emphasis */
+
+  /* --- Accent -------------------------------------------------------------
+   * ONE accent, used sparingly — five or six elements on a page, no more.
+   *
+   * --accent      display sizes, fills, borders, icons. Not body text: at
+   *               3:1 it passes WCAG AA only for large or bold text.
+   * --accent-ink  small text and links. Keep this at 4.5:1 against --bg.
+   * --accent-soft selection highlight, subtle fills.
+   * --highlight   marker-pen underline. Use on two phrases, at most. */
+  --accent: oklch(0.63 0.176 44);
+  /* Deeper than --accent so cream text on the marquee band reaches 5.54:1.
+   * At --accent it was 3.51:1 and hard to read for everyone, not just AT users. */
+  --accent-band: oklch(0.52 0.176 44);
+  --accent-ink: oklch(0.5 0.16 42);
+  --accent-soft: oklch(0.63 0.176 44 / 12%);
+  --highlight: oklch(0.925 0.115 96);
+
+  --destructive: oklch(0.58 0.21 27);
+
+  /* --- Shape --------------------------------------------------------------- */
+  --radius: 0.75rem;
+
+  /* --- Elevation ----------------------------------------------------------
+   * Three stacked low-alpha shadows, not one big blur. This is what makes a
+   * card look like paper instead of a floating rectangle. */
+  --shadow-paper:
+    0 1px 0 oklch(0.2 0.02 60 / 4%), 0 1px 3px oklch(0.2 0.02 60 / 6%),
+    0 6px 18px -8px oklch(0.2 0.02 60 / 10%);
+  --shadow-lift:
+    0 1px 0 oklch(0.2 0.02 60 / 5%), 0 2px 6px oklch(0.2 0.02 60 / 8%),
+    0 14px 30px -12px oklch(0.2 0.02 60 / 16%);
+
+  /* --- Motion -------------------------------------------------------------
+   * ease-out is the "arrives and settles" curve used for entrances and
+   * reveals. ease-standard is for state changes: hover, focus, toggles. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 150ms;
+  --dur-base: 220ms;
+  --dur-slow: 400ms;
+  --dur-reveal: 650ms;
+
+  /* --- Layout -------------------------------------------------------------- */
+  --container-width: 72rem;
+  --container-gutter: clamp(1rem, 4vw, 2.5rem);
+  --measure: 68ch; /* max line length for long-form reading */
+}
+
+/* ============================================================================
+ * DARK
+ * Only the tokens that change are redefined. Anything not listed here is
+ * inherited from :root, so adding a token above automatically works in both.
+ * ==========================================================================*/
+.dark {
+  color-scheme: dark;
+
+  --bg: oklch(0.172 0.009 60);
+  --bg-elev: oklch(0.214 0.011 60);
+  --bg-band: oklch(0.142 0.008 60);
+
+  --fg: oklch(0.955 0.008 85);
+  --fg-2: oklch(0.78 0.012 85);
+  --fg-3: oklch(0.625 0.014 85);
+
+  --line: oklch(1 0 0 / 11%);
+  --line-hi: oklch(1 0 0 / 20%);
+
+  /* Accents lift in dark mode — the same hue at the same lightness reads
+   * muddy against a dark surface. */
+  --accent: oklch(0.755 0.155 52);
+  --accent-band: oklch(0.52 0.17 46);
+  --accent-ink: oklch(0.8 0.145 55);
+  --accent-soft: oklch(0.755 0.155 52 / 16%);
+  --highlight: oklch(0.45 0.1 96);
+
+  --destructive: oklch(0.68 0.19 25);
+
+  --shadow-paper:
+    0 1px 0 oklch(0 0 0 / 20%), 0 1px 3px oklch(0 0 0 / 28%),
+    0 6px 18px -8px oklch(0 0 0 / 40%);
+  --shadow-lift:
+    0 1px 0 oklch(0 0 0 / 24%), 0 2px 6px oklch(0 0 0 / 32%),
+    0 14px 30px -12px oklch(0 0 0 / 52%);
+}
+
+/* ============================================================================
+ * TYPOGRAPHY
+ * Families are wired to next/font variables in app/layout.tsx. Swap the font
+ * there; the roles below stay the same.
+ *
+ *   display  headings and numerals — wants personality and tight tracking
+ *   sans     body — wants to be invisible
+ *   mono     eyebrows, dates, stack pills, code
+ * ==========================================================================*/
+:root {
+  --type-display-xl: clamp(2.75rem, 2rem + 4.5vw, 6rem);
+  --type-display-lg: clamp(2rem, 1.5rem + 2.5vw, 3.25rem);
+  --type-display-md: clamp(1.375rem, 1.1rem + 1vw, 1.75rem);
+
+  --tracking-display: -0.03em;
+  --tracking-eyebrow: 0.14em;
+}

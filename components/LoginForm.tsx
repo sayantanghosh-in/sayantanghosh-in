@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { AlertCircleIcon } from "lucide-react";
+import { IconAlertCircle } from "@tabler/icons-react";
 import * as z from "zod";
 
 // Import shadcn UI components
@@ -91,7 +91,7 @@ export default function LoginForm() {
       // The API response might contain a redirect_url, or we can use the one from the query string.
       const finalRedirectUrl = data.redirect_url || redirect_url || "/";
 
-      window.location.href = finalRedirectUrl;
+      window.location.assign(finalRedirectUrl);
     } catch {
       setIsError(true);
     } finally {
@@ -101,7 +101,7 @@ export default function LoginForm() {
 
   return (
     <div className="w-full max-w-md p-8 bg-white rounded-lg border-1">
-      <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
+      <h1 className="display-md text-center mb-6">
         Login
       </h1>
       <Form {...form}>
@@ -112,7 +112,7 @@ export default function LoginForm() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-gray-700">Email</FormLabel>
+                <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input placeholder="you@example.com" {...field} />
                 </FormControl>
@@ -126,7 +126,7 @@ export default function LoginForm() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-gray-700">Password</FormLabel>
+                <FormLabel>Password</FormLabel>
                 <FormControl>
                   <Input type="password" placeholder="••••••••" {...field} />
                 </FormControl>
@@ -146,7 +146,7 @@ export default function LoginForm() {
       </Form>
       {isError && (
         <Alert variant="destructive" className="mt-2">
-          <AlertCircleIcon />
+          <IconAlertCircle />
           <AlertTitle>Unable to login.</AlertTitle>
           <AlertDescription>
             <p>Please verify your login credentials and try again.</p>
