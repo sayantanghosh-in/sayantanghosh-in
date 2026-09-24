@@ -1,73 +1,133 @@
-import {
-  IconExternalLink,
-  IconBrandGithub,
-  IconPoint,
-  IconWriting,
-} from "@tabler/icons-react";
-import Link from "next/link";
-import { projects } from "@/lib/constants";
+import { IconBrandGithub, IconStar } from "@tabler/icons-react";
 
-export const Projects = () => {
-  return projects?.map((project) => {
-    return (
-      <section key={project?.id} className="border-t-1 px-2 md:px-32 lg:px-80">
-        <div className="border-x-1 p-2">
-          <h3 className="text-lg font-semibold mb-0.5 underline flex items-start gap-1 text-wrap">
-            <Link
-              href={project?.urls?.landingPage}
-              className="max-w-[calc(100%-14px-0.25rem)]"
-            >
-              {project?.title}
-            </Link>
-            <IconExternalLink
-              size={14}
-              stroke={2}
-              className="mt-2"
-              color="var(--accent-foreground)"
-            />
-          </h3>
-          <p className="text-xs text-muted-foreground mb-1">
-            {project?.timeline}
-          </p>
-          <div className="flex gap-2 items-center mb-2">
-            <Link
-              aria-label="GotoDash github"
-              target="_blank"
-              href={project?.urls?.github}
-            >
-              <IconBrandGithub
-                size={16}
-                stroke={1.5}
-                color="var(--accent-foreground)"
-              />
-            </Link>
-            <Link
-              aria-label="GotoDash blog post"
-              href={project?.urls?.blogPost}
-            >
-              <IconWriting
-                size={16}
-                stroke={1.5}
-                color="var(--accent-foreground)"
-              />
-            </Link>
-          </div>
-          <p className="text-md mb-2">{project?.description}</p>
-          <div className="flex flex-col gap-1">
-            {project?.highlights?.map((highlight, highlightIndex) => {
-              return (
-                <div
-                  key={`project-${project?.id}-highlight-${highlightIndex}`}
-                  className="text-sm flex items-start gap-1"
-                >
-                  <IconPoint size={12} className="mt-1" />
-                  <p className="w-[calc(100%-12px)]">{highlight}</p>
-                </div>
-              );
-            })}
+import { Reveal } from "@/components/site/Reveal";
+
+type Project = {
+  repo: string;
+  name: string;
+  tagline: string;
+  body: string;
+  stack: readonly string[];
+  install?: string;
+  /** Shown if the GitHub API is unreachable at build time. */
+  fallbackStars: number;
+};
+
+const projects: Project[] = [
+  {
+    repo: "sayantanghosh-in/claix",
+    name: "claix",
+    tagline: "A terminal UI for your Claude Code sessions",
+    body: "Claude Code scatters sessions across every project you have ever opened, and finding the one you want means remembering which directory you were in. claix searches, organises and resumes them from a single terminal interface — one static binary, zero config.",
+    stack: ["Go", "Bubble Tea", "Homebrew"],
+    install: "brew install sayantanghosh-in/tap/claix",
+    fallbackStars: 5,
+  },
+  {
+    repo: "sayantanghosh-in/swale",
+    name: "swale",
+    tagline: "A developer assistant that lives in your terminal",
+    body: "Your GitHub pull requests, LeetCode streak, notes and todos in one local SQLite database, with an agent on top that decides for itself which of them to read to answer a question. Local-first, offline-capable, and it works with a model on your own machine.",
+    stack: ["TypeScript", "Node", "SQLite", "Vercel AI SDK"],
+    install: "npx @itssayantan/swale",
+    fallbackStars: 0,
+  },
+];
+
+async function getStars(repo: string, fallback: number): Promise<number> {
+  try {
+    const response = await fetch(`https://api.github.com/repos/${repo}`, {
+      headers: { Accept: "application/vnd.github+json" },
+      next: { revalidate: 3600 },
+    });
+    if (!response.ok) return fallback;
+    const data = (await response.json()) as { stargazers_count?: number };
+    return typeof data.stargazers_count === "number"
+      ? data.stargazers_count
+      : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+export async function Projects() {
+  const stars = await Promise.all(
+    projects.map((project) => getStars(project.repo, project.fallbackStars)),
+  );
+
+  return (
+    <section id="work" className="border-b border-line">
+      <div className="container-page">
+        <div className="rails px-4 py-16 sm:px-8 sm:py-24">
+          <Reveal>
+            <p className="eyebrow">Selected work</p>
+            <h2 className="display-lg mt-3">Things I built and shipped</h2>
+            <p className="mt-4 max-w-[60ch] text-base text-fg-2">
+              Open source, in the open. Both solve a problem I had first.
+            </p>
+          </Reveal>
+
+          <div className="mt-12 grid gap-6 lg:grid-cols-2">
+            {projects.map((project, index) => (
+              <Reveal key={project.repo} delay={index * 80}>
+                <article className="card-surface flex h-full flex-col p-6 hover:-translate-y-0.5 hover:border-line-hi hover:shadow-lift sm:p-7">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <h3 className="display-md">{project.name}</h3>
+                      <p className="mt-1 text-sm text-fg-3">
+                        {project.tagline}
+                      </p>
+                    </div>
+                    {stars[index] ? (
+                      <a
+                        href={`https://github.com/${project.repo}/stargazers`}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`${stars[index]} stars on GitHub`}
+                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-line px-2.5 py-1 text-sm text-fg-2 transition-colors duration-200 hover:border-accent hover:text-accent-ink"
+                      >
+                        <IconStar size={14} className="text-accent" />
+                        <span className="numeral text-sm">{stars[index]}</span>
+                      </a>
+                    ) : null}
+                  </div>
+
+                  <p className="mt-5 max-w-[60ch] text-sm text-fg-2">
+                    {project.body}
+                  </p>
+
+                  {project.install ? (
+                    <code className="mt-6 block overflow-x-auto rounded-md border border-line bg-bg-band px-3 py-2.5 font-mono text-xs text-fg-2">
+                      {project.install}
+                    </code>
+                  ) : null}
+
+                  <ul className="mt-5 flex flex-wrap gap-2">
+                    {project.stack.map((item) => (
+                      <li
+                        key={item}
+                        className="eyebrow rounded-full border border-line px-2.5 py-1 text-fg-3"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <a
+                    href={`https://github.com/${project.repo}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-auto inline-flex items-center gap-2 pt-6 text-sm text-accent-ink underline decoration-accent/30 underline-offset-4 transition-colors duration-200 hover:decoration-accent"
+                  >
+                    <IconBrandGithub size={15} />
+                    View on GitHub
+                  </a>
+                </article>
+              </Reveal>
+            ))}
           </div>
         </div>
-      </section>
-    );
-  });
-};
+      </div>
+    </section>
+  );
+}

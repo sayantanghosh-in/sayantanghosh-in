@@ -1,90 +1,126 @@
-import Image from "next/image";
-import { Gradient } from "@/components/Gradient";
-import { getPostSlugs, getPostContent, PostContent } from "@/lib/posts";
+import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import { format } from "date-fns";
+import { IconArrowLeft } from "@tabler/icons-react";
 
-// Next.js function to generate the static paths for all blog posts.
+import { EmbedLoader } from "@/components/site/EmbedLoader";
+import { getPostContent, getPostSlugs, type PostContent } from "@/lib/posts";
+import { SITE } from "@/lib/site";
+
 export async function generateStaticParams() {
-  const slugs = getPostSlugs();
-  return slugs.map((slug) => ({ slug }));
+  return getPostSlugs().map((slug) => ({ slug }));
 }
 
-// Define the component's props with a type for the dynamic segment
-interface PostPageProps {
-  params: Promise<{
-    slug: string;
-  }>;
+type PostPageProps = { params: Promise<{ slug: string }> };
+
+export async function generateMetadata({
+  params,
+}: PostPageProps): Promise<Metadata> {
+  const { slug } = await params;
+
+  let post: PostContent;
+  try {
+    post = await getPostContent(slug);
+  } catch {
+    return {};
+  }
+
+  return {
+    title: post.title,
+    description: post.description,
+    alternates: { canonical: `/blog/${slug}` },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.description,
+      url: `${SITE.url}/blog/${slug}`,
+      publishedTime: post.date,
+      authors: [post.author],
+      tags: post.tags,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      creator: SITE.xHandle,
+    },
+  };
 }
 
-// The individual blog post page component.
-export default async function PostPage(props: PostPageProps) {
-  const params = await props?.params;
-  const postData: PostContent = await getPostContent(params?.slug);
+export default async function PostPage({ params }: PostPageProps) {
+  const { slug } = await params;
+
+  let post: PostContent;
+  try {
+    post = await getPostContent(slug);
+  } catch {
+    notFound();
+  }
+
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: { "@type": "Person", name: post.author, url: SITE.url },
+    publisher: { "@type": "Person", name: SITE.name, url: SITE.url },
+    mainEntityOfPage: `${SITE.url}/blog/${slug}`,
+    keywords: post.tags?.join(", "),
+  };
 
   return (
-    <div>
-      <section className="px-2 md:px-32 lg:px-80">
-        <div className="flex items-center gap-0.25 border-x-1">
-          <Image
-            alt="Sayantan Ghosh Photo"
-            src="/sayantan.png"
-            width={90}
-            height={90}
-            className="w-[90px] h-[90px] md:w-[130px] md:h-[130px] lg:w-[160px] lg:h-[160px] rounded-full"
-          />
-          <div className="w-full flex flex-col justify-start border-l-1">
-            <Gradient heightClass="h-6 md:h-16 lg:h-24" />
-            <h1 className="border-t-1 pt-2 pl-2 text-3xl font-semibold">
-              Sayantan Ghosh
-            </h1>
-            <h2 className="border-t-1 mt-0.25 pt-1.25 pl-2 pb-1.25 text-sm text-[var(--accent-foreground)]">
-              Frontend Developer
-            </h2>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
+      <EmbedLoader />
+
+      <article className="border-b border-line">
+        <div className="container-page">
+          <div className="rails px-4 py-12 sm:px-8 sm:py-16">
+            <Link
+              href="/blog"
+              className="eyebrow inline-flex items-center gap-1.5 transition-colors duration-200 hover:text-fg"
+            >
+              <IconArrowLeft size={13} />
+              All writing
+            </Link>
+
+            <header className="mt-8 border-b border-line pb-8">
+              <h1 className="display-lg max-w-[22ch]">{post.title}</h1>
+              <div className="eyebrow mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
+                <time dateTime={post.date}>
+                  {format(new Date(post.date), "dd MMMM yyyy")}
+                </time>
+                <span aria-hidden>·</span>
+                <span>{post.author}</span>
+              </div>
+              {post.tags?.length ? (
+                <ul className="mt-5 flex flex-wrap gap-2">
+                  {post.tags.map((tag) => (
+                    <li
+                      key={tag}
+                      className="eyebrow rounded-full border border-line px-2.5 py-1 text-fg-3"
+                    >
+                      {tag.replace(/^#/, "")}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+            </header>
+
+            <div
+              className="prose prose-neutral mt-10 max-w-[68ch] dark:prose-invert prose-headings:font-[family-name:var(--font-display)] prose-headings:tracking-tight prose-a:text-accent-ink prose-a:decoration-accent/30 prose-a:underline-offset-4 hover:prose-a:decoration-accent prose-blockquote:border-l-accent prose-code:rounded prose-code:bg-bg-band prose-code:px-1.5 prose-code:py-0.5 prose-code:font-normal prose-code:before:content-none prose-code:after:content-none prose-pre:border prose-pre:border-line prose-pre:bg-bg-band"
+              dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+              suppressHydrationWarning
+            />
           </div>
         </div>
-      </section>
-      <Gradient additionalClass="border-y-1" />
-      <section className="px-2 md:px-32 lg:px-80">
-        <div className="flex gap-2 items-center border-x-1 p-2 text-xs text-gray-500">
-          <Link href="/" className="hover:underline">
-            Home
-          </Link>
-          &gt;
-          <Link href="/blog" className="hover:underline">
-            Blog Posts
-          </Link>
-          &gt;
-          <Link href={params?.slug} className="text-black-500 font-bold">
-            {params?.slug}
-          </Link>
-        </div>
-      </section>
-      <Gradient additionalClass="border-y-1" />
-      <section className="px-2 md:px-32 lg:px-80">
-        <h1 className="text-2xl font-bold text-center text-gray-800 border-x-1 p-2">
-          {postData.title}
-        </h1>
-        <Gradient additionalClass="border-1" heightClass="h-1" />
-        <div className="text-gray-500 border-x-1 p-2">
-          <p className="text-xs">
-            <b>{postData.author}</b> &bull;{" "}
-            <i>
-              {new Date(postData.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </i>
-          </p>
-        </div>
-        <Gradient additionalClass="border-1" />
-        {/* Render the HTML content from the Markdown */}
-        <div
-          className="prose prose-sm max-w-none border-x-1 p-2"
-          dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
-          suppressHydrationWarning
-        />
-      </section>
-    </div>
+      </article>
+    </>
   );
 }

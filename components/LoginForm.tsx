@@ -101,7 +101,7 @@ export default function LoginForm() {
 
   return (
     <div className="w-full max-w-md p-8 bg-white rounded-lg border-1">
-      <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
+      <h1 className="display-md text-center mb-6">
         Login
       </h1>
       <Form {...form}>
@@ -112,7 +112,7 @@ export default function LoginForm() {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-gray-700">Email</FormLabel>
+                <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input placeholder="you@example.com" {...field} />
                 </FormControl>
@@ -126,7 +126,7 @@ export default function LoginForm() {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-gray-700">Password</FormLabel>
+                <FormLabel>Password</FormLabel>
                 <FormControl>
                   <Input type="password" placeholder="••••••••" {...field} />
                 </FormControl>
