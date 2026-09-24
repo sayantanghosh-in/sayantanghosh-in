@@ -1,3 +1,11 @@
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  Pill,
+  Section,
+  SectionHeading,
+} from "@/components/primitives";
 import { Reveal } from "@/components/site/Reveal";
 
 /* ------------------------------------------------------------------ */
@@ -143,12 +151,7 @@ function StackPills({ stack }: { stack: readonly string[] }) {
   return (
     <ul className="mt-5 flex flex-wrap gap-2">
       {stack.map((item) => (
-        <li
-          key={item}
-          className="eyebrow rounded-full border border-line px-2.5 py-1 text-fg-3"
-        >
-          {item}
-        </li>
+        <Pill key={item}>{item}</Pill>
       ))}
     </ul>
   );
@@ -156,13 +159,13 @@ function StackPills({ stack }: { stack: readonly string[] }) {
 
 export function Experience() {
   return (
-    <section id="experience" className="border-b border-line">
-      <div className="container-page">
-        <div className="rails px-4 py-16 sm:px-8 sm:py-24">
-          <Reveal>
-            <p className="eyebrow">Experience</p>
-            <h2 className="display-lg scroll-enter mt-3">Nine years, five companies</h2>
-          </Reveal>
+    <Section id="experience">
+      <Reveal>
+        <SectionHeading
+          eyebrow="Experience"
+          title="Nine years, five companies"
+        />
+      </Reveal>
 
           {/* Proportional tenure bar */}
           <Reveal delay={80}>
@@ -230,15 +233,15 @@ export function Experience() {
             <div className="space-y-6">
               {/* ---------- Feature card: the current role ---------- */}
               <Reveal>
-                <article className="card-surface scroll-settle overflow-hidden shadow-paper">
-                  <div className="border-b border-line bg-bg-band px-5 py-5 sm:px-7">
+                <Card variant="feature">
+                  <CardHeader>
                     <p className="eyebrow text-accent-ink">
                       Now · Jun 2026 – Present
                     </p>
                     <h3 className="display-md mt-2">Tech Lead — Synup</h3>
-                  </div>
+                  </CardHeader>
 
-                  <div className="px-5 py-7 sm:px-7">
+                  <CardBody>
                     <p className="max-w-[68ch] text-base text-fg-2">
                       I took Synup&rsquo;s AI agent from research question to
                       revenue, and I run the team that ships it — architecture
@@ -320,14 +323,14 @@ export function Experience() {
                     <p className="eyebrow mt-3">
                       Also worked with — Azure AI Foundry
                     </p>
-                  </div>
-                </article>
+                  </CardBody>
+                </Card>
               </Reveal>
 
               {/* ---------- The ladder below it ---------- */}
               {synupLadder.map((role, index) => (
                 <Reveal key={role.designation} delay={index * 60}>
-                  <article className="card-surface scroll-settle px-5 py-6 hover:border-line-hi hover:shadow-paper sm:px-7">
+                  <Card interactive className="px-5 py-6 sm:px-7">
                     <p className="eyebrow">{role.date}</p>
                     <h3 className="mt-1.5 text-lg font-semibold">
                       {role.designation} — Synup
@@ -360,13 +363,13 @@ export function Experience() {
                     ) : null}
 
                     <StackPills stack={role.stack} />
-                  </article>
+                  </Card>
                 </Reveal>
               ))}
 
               {/* ---------- Earlier companies, one row each ---------- */}
               <Reveal>
-                <div className="card-surface divide-y divide-line overflow-hidden">
+                <div className="card-surface scroll-settle divide-y divide-line overflow-hidden">
                   {earlier.map((company) => (
                     <details key={company.company} className="group">
                       <summary className="flex cursor-pointer list-none flex-wrap items-baseline gap-x-3 gap-y-1 px-5 py-4 transition-colors duration-200 hover:bg-bg-band sm:px-7">
@@ -388,8 +391,6 @@ export function Experience() {
               </Reveal>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
+    </Section>
   );
 }

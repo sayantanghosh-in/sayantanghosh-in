@@ -51,11 +51,11 @@ test.describe("blog post", () => {
 
     const block = page.locator(".code-block").first();
     await block.hover();
-    const copy = block.getByRole("button", { name: /copy code/i });
+    const copy = block.locator("button.code-copy");
     await expect(copy).toBeVisible();
 
     await copy.click();
-    await expect(copy).toHaveText(/copied/i);
+    await expect(copy).toHaveAttribute("aria-label", /copied/i);
 
     const clipboard = await page.evaluate(() =>
       navigator.clipboard.readText(),
@@ -106,8 +106,8 @@ test("the copy button survives an effect re-run", async ({ page }) => {
   await page.goBack();
 
   const block = page.locator(".code-block").first();
-  const copy = block.getByRole("button", { name: /copy code/i });
+  const copy = block.locator("button.code-copy");
   await expect(copy).toBeVisible();
   await copy.click();
-  await expect(copy).toHaveText(/copied/i);
+  await expect(copy).toHaveAttribute("aria-label", /copied/i);
 });

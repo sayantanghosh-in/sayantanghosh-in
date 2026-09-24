@@ -95,7 +95,7 @@ export function Hero() {
                 <li>
                   <Link
                     className="transition-colors duration-200 hover:text-fg"
-                    href="/sayantan_ghosh_resume.pdf"
+                    href="/sayantan-ghosh-resume.pdf"
                   >
                     Résumé
                   </Link>

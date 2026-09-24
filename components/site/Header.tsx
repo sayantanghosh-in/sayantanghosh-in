@@ -34,7 +34,7 @@ export function Header() {
         >
           <Link
             href="/"
-            className="display-md text-base tracking-tight transition-colors duration-200 hover:text-accent-ink"
+            className="display-md -mx-2 rounded-md px-2 py-2 text-base tracking-tight transition-colors duration-200 hover:text-accent-ink"
           >
             Sayantan Ghosh
           </Link>

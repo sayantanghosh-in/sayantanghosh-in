@@ -1,5 +1,13 @@
-import { IconBrandGithub, IconStar } from "@tabler/icons-react";
+import { IconStar } from "@tabler/icons-react";
 
+import {
+  ArrowLink,
+  Card,
+  CodeBlock,
+  PillList,
+  Section,
+  SectionHeading,
+} from "@/components/primitives";
 import { CodeCopy } from "@/components/site/CodeCopy";
 import { Reveal } from "@/components/site/Reveal";
 
@@ -57,84 +65,58 @@ export async function Projects() {
   );
 
   return (
-    <section id="work" className="border-b border-line">
+    <Section id="work">
       <CodeCopy />
-      <div className="container-page">
-        <div className="rails px-4 py-16 sm:px-8 sm:py-24">
-          <Reveal>
-            <p className="eyebrow">Selected work</p>
-            <h2 className="display-lg scroll-enter mt-3">Things I built and shipped</h2>
-            <p className="mt-4 max-w-[60ch] text-base text-fg-2">
-              Open source, in the open. Both solve a problem I had first.
-            </p>
-          </Reveal>
+      <SectionHeading
+        eyebrow="Selected work"
+        title="Things I built and shipped"
+        lede="Open source, in the open. Both solve a problem I had first."
+      />
 
-          <div className="mt-12 grid gap-6 lg:grid-cols-2">
-            {projects.map((project, index) => (
-              <Reveal key={project.repo} delay={index * 80}>
-                <article className="card-surface scroll-settle flex h-full flex-col p-6 hover:-translate-y-0.5 hover:border-line-hi hover:shadow-lift sm:p-7">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h3 className="display-md">{project.name}</h3>
-                      <p className="mt-1 text-sm text-fg-3">
-                        {project.tagline}
-                      </p>
-                    </div>
-                    {stars[index] ? (
-                      <a
-                        href={`https://github.com/${project.repo}/stargazers`}
-                        target="_blank"
-                        rel="noreferrer"
-                        aria-label={`${stars[index]} stars on GitHub`}
-                        className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-line px-2.5 py-1 text-sm text-fg-2 transition-colors duration-200 hover:border-accent hover:text-accent-ink"
-                      >
-                        <IconStar size={14} className="text-accent" />
-                        <span className="numeral text-sm">{stars[index]}</span>
-                      </a>
-                    ) : null}
-                  </div>
-
-                  <p className="mt-5 max-w-[60ch] text-sm text-fg-2">
-                    {project.body}
-                  </p>
-
-                  {project.install ? (
-                    <div className="code-block mt-6">
-                      <code
-                        data-copyable
-                        className="block overflow-x-auto rounded-md border border-line bg-bg-band py-2.5 pl-3 pr-20 font-mono text-xs text-fg-2"
-                      >
-                        {project.install}
-                      </code>
-                    </div>
-                  ) : null}
-
-                  <ul className="mt-5 flex flex-wrap gap-2">
-                    {project.stack.map((item) => (
-                      <li
-                        key={item}
-                        className="eyebrow rounded-full border border-line px-2.5 py-1 text-fg-3"
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-
+      <div className="grid gap-6 lg:grid-cols-2">
+        {projects.map((project, index) => (
+          <Reveal key={project.repo} delay={index * 80}>
+            <Card interactive className="flex h-full flex-col p-6 sm:p-7">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <h3 className="display-md">{project.name}</h3>
+                  <p className="mt-1 text-sm text-fg-3">{project.tagline}</p>
+                </div>
+                {stars[index] ? (
                   <a
-                    href={`https://github.com/${project.repo}`}
+                    href={`https://github.com/${project.repo}/stargazers`}
                     target="_blank"
                     rel="noreferrer"
-                    className="mt-auto inline-flex items-center gap-2 pt-6 text-sm text-accent-ink underline decoration-accent/30 underline-offset-4 transition-colors duration-200 hover:decoration-accent"
+                    aria-label={`${stars[index]} stars on GitHub`}
+                    className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-line px-2.5 py-1 text-sm text-fg-2 transition-colors duration-200 hover:border-accent hover:text-accent-ink"
                   >
-                    <IconBrandGithub size={15} />
-                    View on GitHub
+                    <IconStar size={14} className="text-accent" />
+                    <span className="numeral text-sm">{stars[index]}</span>
                   </a>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </div>
+                ) : null}
+              </div>
+
+              <p className="mt-5 max-w-[60ch] text-sm text-fg-2">
+                {project.body}
+              </p>
+
+              {project.install ? (
+                <div className="mt-6">
+                  <CodeBlock label="install">{project.install}</CodeBlock>
+                </div>
+              ) : null}
+
+              <PillList items={project.stack} />
+
+              <div className="mt-auto pt-6">
+                <ArrowLink external href={`https://github.com/${project.repo}`}>
+                  View on GitHub
+                </ArrowLink>
+              </div>
+            </Card>
+          </Reveal>
+        ))}
       </div>
-    </section>
+    </Section>
   );
 }

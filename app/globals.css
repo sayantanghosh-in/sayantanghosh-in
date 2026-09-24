@@ -57,6 +57,17 @@
     -webkit-text-size-adjust: 100%;
   }
 
+  /*
+   * clip, not hidden. The marquee is rotated and scaled past the viewport on
+   * purpose, which made the document scroll sideways. `hidden` would fix that
+   * too, but it turns body into a scroll container and breaks position: sticky
+   * on the header; `clip` does not.
+   */
+  html,
+  body {
+    overflow-x: clip;
+  }
+
   body {
     background-color: var(--bg);
     color: var(--fg);
@@ -441,29 +452,69 @@ html:not(.dark) .prose :where(pre) span {
   text-align: left;
 }
 
-/* Copy button, injected client-side after mount */
+/* ---- Code block shell ---------------------------------------------------
+ * A header bar reserves a row for the copy control, so it can never sit on top
+ * of the code. The previous version was absolutely positioned and overlapped
+ * wrapped text on narrow screens.
+ */
 .code-block {
-  position: relative;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-band);
 }
 
-.code-copy {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+.code-block__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 2.25rem;
+  padding: 0.25rem 0.375rem 0.25rem 0.875rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-elev);
+}
+
+.code-block__label {
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.625rem;
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
   color: var(--fg-3);
-  background: var(--bg-elev);
-  border: 1px solid var(--line);
+}
+
+.code-block__body {
+  display: block;
+  overflow-x: auto;
+  padding: 0.875rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--fg-2);
+  white-space: pre;
+}
+
+/* A pre inside a block already carries its own padding from the prose rules */
+.code-block :where(pre) {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+.code-copy {
+  display: grid;
+  place-items: center;
+  width: 1.875rem;
+  height: 1.875rem;
+  flex-shrink: 0;
+  border: 1px solid transparent;
   border-radius: 0.375rem;
-  padding: 0.3rem 0.55rem;
+  background: transparent;
+  color: var(--fg-3);
   cursor: pointer;
   /*
-   * Deliberately NOT faded with opacity. Lowering opacity on text blends it
-   * toward the background and breaks the contrast ratio; the button stays at
-   * full opacity and is kept quiet by its size and border instead.
+   * Deliberately not faded with opacity: lowering opacity on an icon blends it
+   * toward the background and breaks its contrast ratio.
    */
   transition:
     color var(--dur-base) var(--ease-standard),
@@ -471,33 +522,15 @@ html:not(.dark) .prose :where(pre) span {
     border-color var(--dur-base) var(--ease-standard);
 }
 
-.code-block:hover .code-copy,
-.code-copy:focus-visible {
-  color: var(--fg);
-  border-color: var(--line-hi);
-}
-
-/*
- * Single-line snippets (the install commands) are too short for a top-anchored
- * button, so centre it instead.
- */
-.code-block:has(> [data-copyable]) .code-copy {
-  top: 50%;
-  transform: translateY(-50%);
-}
-
 .code-copy:hover {
   color: var(--fg);
   background: var(--bg-band);
-  border-color: var(--line-hi);
+  border-color: var(--line);
 }
 
 .code-copy[data-copied] {
   color: var(--accent-ink);
-  border-color: var(--accent);
 }
-
-
 
 /* ============================================================
    Marquee ribbon

@@ -94,11 +94,11 @@ test("install commands on the landing page are copyable", async ({ page }) => {
   await page.goto("/");
 
   const block = page.locator("#work .code-block").first();
-  const copy = block.getByRole("button", { name: /copy code/i });
+  const copy = block.locator("button.code-copy");
   await expect(copy).toBeVisible();
 
   await copy.click();
-  await expect(copy).toHaveText(/copied/i);
+  await expect(copy).toHaveAttribute("aria-label", /copied/i);
 
   const clipboard = await page.evaluate(() => navigator.clipboard.readText());
   expect(clipboard).toContain("brew install sayantanghosh-in/tap/claix");
@@ -126,4 +126,21 @@ test("body copy stays inside a readable measure", async ({ page }) => {
   });
 
   expect(tooLong).toEqual([]);
+});
+
+test("the copy control never overlaps code, at any width", async ({ page }) => {
+  await page.goto("/");
+
+  const block = page.locator("#work .code-block").first();
+  const codeBox = await block.locator(".code-block__body").boundingBox();
+  const buttonBox = await block.locator(".code-copy").boundingBox();
+
+  expect(codeBox).not.toBeNull();
+  expect(buttonBox).not.toBeNull();
+
+  // The button lives in its own bar above the code, so the two never intersect.
+  const overlaps =
+    buttonBox!.y + buttonBox!.height > codeBox!.y &&
+    buttonBox!.y < codeBox!.y + codeBox!.height;
+  expect(overlaps).toBe(false);
 });

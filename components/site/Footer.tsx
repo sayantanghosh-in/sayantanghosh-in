@@ -67,7 +67,7 @@ export function Footer() {
               ))}
             </ul>
             <Link
-              href="/sayantan_ghosh_resume.pdf"
+              href="/sayantan-ghosh-resume.pdf"
               className="eyebrow transition-colors duration-200 hover:text-fg"
             >
               Download résumé ↓
