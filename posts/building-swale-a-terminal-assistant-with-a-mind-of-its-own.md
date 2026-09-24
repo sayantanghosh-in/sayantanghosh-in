@@ -4,6 +4,7 @@ date: "2026-09-24"
 author: "Sayantan Ghosh"
 description: "Why I am building a local-first developer assistant with a real agent loop instead of another todo CLI — and what I learned about the line between a workflow and an agent."
 tags: ["AI", "Agents", "TypeScript", "Open Source", "Developer Tools"]
+published: false
 ---
 
 I have a folder of half-finished command line tools. Most of them died the same way: I built the data model, I built the commands, and then I realised the thing I actually wanted — *just tell me what matters today* — was the part I had not built.

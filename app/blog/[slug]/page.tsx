@@ -12,6 +12,12 @@ export async function generateStaticParams() {
   return getPostSlugs().map((slug) => ({ slug }));
 }
 
+/**
+ * Only the slugs above exist. Without this, Next renders unknown slugs on
+ * demand, so a post marked `published: false` would still be reachable by URL.
+ */
+export const dynamicParams = false;
+
 type PostPageProps = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({

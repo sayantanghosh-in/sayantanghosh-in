@@ -14,7 +14,18 @@ export type PostData = {
   author: string;
   description: string;
   tags: string[];
+  /**
+   * Set `published: false` in a post's frontmatter to hide it from the blog
+   * index, the homepage and the sitemap, and to make its URL 404. Omitting the
+   * field entirely means published, so existing posts are unaffected.
+   */
+  published?: boolean;
 };
+
+/** A post is visible unless it explicitly opts out. */
+function isPublished(post: { published?: boolean }): boolean {
+  return post.published !== false;
+}
 
 // Define the type for the full post content (including HTML)
 export type PostContent = PostData & {
@@ -51,7 +62,7 @@ export function getSortedPostsData(max?: number): PostData[] {
   });
 
   // Sort posts by date in descending order
-  const _sortedPosts = allPostsData.sort((a, b) => {
+  const _sortedPosts = allPostsData.filter(isPublished).sort((a, b) => {
     if (new Date(a.date) < new Date(b.date)) {
       return 1;
     } else {
@@ -74,7 +85,14 @@ export function getSortedPostsData(max?: number): PostData[] {
 export function getPostSlugs(): string[] {
   return fs
     .readdirSync(postsDirectory)
-    .map((fileName) => fileName.replace(/\.md$/, ""));
+    .map((fileName) => fileName.replace(/\.md$/, ""))
+    .filter((slug) => {
+      const fileContents = fs.readFileSync(
+        path.join(postsDirectory, `${slug}.md`),
+        "utf8",
+      );
+      return isPublished(matter(fileContents).data as { published?: boolean });
+    });
 }
 
 /**
@@ -88,6 +106,11 @@ export async function getPostContent(slug: string): Promise<PostContent> {
 
   // Use gray-matter to parse the post metadata section
   const { data, content } = matter(fileContents);
+
+  // Hidden posts 404 rather than being reachable by direct URL
+  if (!isPublished(data as { published?: boolean })) {
+    throw new Error(`Post "${slug}" is not published`);
+  }
 
   // Using remark-rehype pipeline to convert markdown into an HTML string
   // This pipeline specifically supports raw HTML tags (like <img>) inside markdown

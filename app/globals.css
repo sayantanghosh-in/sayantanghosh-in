@@ -1,99 +1,8 @@
 @import "tailwindcss";
+@import "./theme.css";
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
-
-/* ============================================================
-   Design tokens
-   ============================================================ */
-:root {
-  color-scheme: light;
-
-  /* Surfaces — warm paper, never pure white */
-  --bg: oklch(0.977 0.011 85);
-  --bg-elev: oklch(0.992 0.007 85);
-  --bg-band: oklch(0.951 0.015 85);
-
-  /* Ink — three-step ramp */
-  --fg: oklch(0.205 0.02 60);
-  --fg-2: oklch(0.44 0.018 60);
-  --fg-3: oklch(0.585 0.015 60);
-
-  /* Hairlines */
-  --line: oklch(0.885 0.016 85);
-  --line-hi: oklch(0.82 0.022 85);
-
-  /* One accent, three jobs */
-  --accent: oklch(0.63 0.176 44);
-  --accent-ink: oklch(0.5 0.16 42);
-  --accent-soft: oklch(0.63 0.176 44 / 12%);
-  --highlight: oklch(0.925 0.115 96);
-
-  /* shadcn compatibility (ui/* primitives) */
-  --background: var(--bg);
-  --foreground: var(--fg);
-  --card: var(--bg-elev);
-  --card-foreground: var(--fg);
-  --popover: var(--bg-elev);
-  --popover-foreground: var(--fg);
-  --primary: var(--fg);
-  --primary-foreground: var(--bg);
-  --secondary: var(--bg-band);
-  --secondary-foreground: var(--fg-2);
-  --muted: var(--bg-band);
-  --muted-foreground: var(--fg-3);
-  --accent-foreground: var(--fg);
-  --destructive: oklch(0.58 0.21 27);
-  --border: var(--line);
-  --input: var(--line);
-  --ring: var(--accent);
-  --radius: 0.75rem;
-
-  /* Paper shadow — three stacked low-alpha layers, not one blur */
-  --shadow-paper:
-    0 1px 0 oklch(0.2 0.02 60 / 4%), 0 1px 3px oklch(0.2 0.02 60 / 6%),
-    0 6px 18px -8px oklch(0.2 0.02 60 / 10%);
-  --shadow-lift:
-    0 1px 0 oklch(0.2 0.02 60 / 5%), 0 2px 6px oklch(0.2 0.02 60 / 8%),
-    0 14px 30px -12px oklch(0.2 0.02 60 / 16%);
-
-  /* Motion */
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
-  --dur-fast: 150ms;
-  --dur-base: 220ms;
-  --dur-slow: 400ms;
-  --dur-reveal: 650ms;
-}
-
-.dark {
-  color-scheme: dark;
-
-  --bg: oklch(0.172 0.009 60);
-  --bg-elev: oklch(0.214 0.011 60);
-  --bg-band: oklch(0.142 0.008 60);
-
-  --fg: oklch(0.955 0.008 85);
-  --fg-2: oklch(0.78 0.012 85);
-  --fg-3: oklch(0.625 0.014 85);
-
-  --line: oklch(1 0 0 / 11%);
-  --line-hi: oklch(1 0 0 / 20%);
-
-  --accent: oklch(0.755 0.155 52);
-  --accent-ink: oklch(0.8 0.145 55);
-  --accent-soft: oklch(0.755 0.155 52 / 16%);
-  --highlight: oklch(0.45 0.1 96);
-
-  --destructive: oklch(0.68 0.19 25);
-
-  --shadow-paper:
-    0 1px 0 oklch(0 0 0 / 20%), 0 1px 3px oklch(0 0 0 / 28%),
-    0 6px 18px -8px oklch(0 0 0 / 40%);
-  --shadow-lift:
-    0 1px 0 oklch(0 0 0 / 24%), 0 2px 6px oklch(0 0 0 / 32%),
-    0 14px 30px -12px oklch(0 0 0 / 52%);
-}
 
 @theme inline {
   --color-bg: var(--bg);
@@ -186,9 +95,9 @@
    ============================================================ */
 @utility container-page {
   width: 100%;
-  max-width: 72rem;
+  max-width: var(--container-width);
   margin-inline: auto;
-  padding-inline: clamp(1rem, 4vw, 2.5rem);
+  padding-inline: var(--container-gutter);
 }
 
 /* The hairline rails — the site's identity, kept from v1 */
@@ -200,14 +109,14 @@
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: 0.6875rem;
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
   color: var(--fg-3);
 }
 
 @utility display-xl {
   font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
-  font-size: clamp(2.75rem, 2rem + 4.5vw, 6rem);
+  font-size: var(--type-display-xl);
   line-height: 1;
   letter-spacing: -0.03em;
   font-weight: 700;
@@ -215,7 +124,7 @@
 
 @utility display-lg {
   font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
-  font-size: clamp(2rem, 1.5rem + 2.5vw, 3.25rem);
+  font-size: var(--type-display-lg);
   line-height: 1.05;
   letter-spacing: -0.025em;
   font-weight: 700;
@@ -223,7 +132,7 @@
 
 @utility display-md {
   font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
-  font-size: clamp(1.375rem, 1.1rem + 1vw, 1.75rem);
+  font-size: var(--type-display-md);
   line-height: 1.2;
   letter-spacing: -0.015em;
   font-weight: 600;
@@ -347,4 +256,53 @@
     opacity: 1 !important;
     transform: none !important;
   }
+}
+
+/* ============================================================
+   Long-form content
+   ============================================================ */
+
+/* Video embedded in a post behaves like a GIF but costs a fraction of one */
+.prose figure video {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  display: block;
+}
+
+.prose figure figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.8125rem;
+  color: var(--fg-3);
+  text-align: center;
+}
+
+/*
+ * Social embeds render as plain blockquotes until their script upgrades them.
+ * Styling that fallback means the post looks finished even if the third-party
+ * script is blocked, slow, or never loads at all.
+ */
+.prose blockquote.twitter-tweet,
+.prose blockquote.instagram-media {
+  border: 1px solid var(--line);
+  border-left-width: 1px;
+  border-radius: var(--radius);
+  background: var(--bg-elev);
+  padding: 1.25rem 1.5rem;
+  margin-inline: auto;
+  max-width: 34rem;
+  font-style: normal;
+  quotes: none;
+}
+
+.prose blockquote.twitter-tweet p,
+.prose blockquote.instagram-media p {
+  font-size: 0.9375rem;
+  color: var(--fg-2);
+}
+
+.prose blockquote.twitter-tweet::before,
+.prose blockquote.twitter-tweet::after {
+  content: none;
 }
