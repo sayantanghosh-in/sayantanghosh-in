@@ -38,7 +38,7 @@ const leadMetrics = [
 ] as const;
 
 const leadHighlights = [
-  "Shipped an AI agent product line from ideation to GA — orchestrated in LangGraph, grounded by RAG over a SQL vector store, exposed to customers through Slack — opening a new revenue stream and lifting retention.",
+  "Shipped an AI agent product line from ideation to GA — orchestrated in LangGraph, grounded by RAG over a SQL vector store, exposed to customers through Slack — reaching paid adoption in month one and opening a new revenue stream.",
   "Built the evaluation harness before scaling the agent, covering tool selection, retrieval grounding and answer quality. Every prompt, catalogue and model change ships only when the eval run is green — which is what let the team swap models and reshape the tool surface without regressions.",
   "Cut tokens per request by 80% by re-architecting how the tool catalogue is exposed to the model, verified against the eval suite and LangSmith traces rather than by eyeballing outputs.",
 ] as const;
