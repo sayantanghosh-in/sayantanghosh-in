@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { AlertCircleIcon } from "lucide-react";
+import { IconAlertCircle } from "@tabler/icons-react";
 import * as z from "zod";
 
 // Import shadcn UI components
@@ -91,7 +91,7 @@ export default function LoginForm() {
       // The API response might contain a redirect_url, or we can use the one from the query string.
       const finalRedirectUrl = data.redirect_url || redirect_url || "/";
 
-      window.location.href = finalRedirectUrl;
+      window.location.assign(finalRedirectUrl);
     } catch {
       setIsError(true);
     } finally {
@@ -146,7 +146,7 @@ export default function LoginForm() {
       </Form>
       {isError && (
         <Alert variant="destructive" className="mt-2">
-          <AlertCircleIcon />
+          <IconAlertCircle />
           <AlertTitle>Unable to login.</AlertTitle>
           <AlertDescription>
             <p>Please verify your login credentials and try again.</p>
