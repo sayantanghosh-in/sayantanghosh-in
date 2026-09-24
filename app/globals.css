@@ -262,6 +262,106 @@
    Long-form content
    ============================================================ */
 
+/*
+ * Wire Tailwind Typography to the theme tokens rather than overriding it with
+ * a chain of prose-* utilities. Doing it here means dark mode is automatic —
+ * the tokens flip, so the prose flips with them — and it fixes the bug where
+ * pre kept its default light-grey text on a light background.
+ */
+.prose {
+  --tw-prose-body: var(--fg-2);
+  --tw-prose-headings: var(--fg);
+  --tw-prose-lead: var(--fg-2);
+  --tw-prose-links: var(--accent-ink);
+  --tw-prose-bold: var(--fg);
+  --tw-prose-counters: var(--fg-3);
+  --tw-prose-bullets: var(--line-hi);
+  --tw-prose-hr: var(--line);
+  --tw-prose-quotes: var(--fg);
+  --tw-prose-quote-borders: var(--accent);
+  --tw-prose-captions: var(--fg-3);
+  --tw-prose-code: var(--fg);
+  --tw-prose-pre-code: var(--fg-2);
+  --tw-prose-pre-bg: var(--bg-band);
+  --tw-prose-th-borders: var(--line-hi);
+  --tw-prose-td-borders: var(--line);
+
+  /* Dark mode uses the same tokens; they already carry the right values. */
+  --tw-prose-invert-body: var(--fg-2);
+  --tw-prose-invert-headings: var(--fg);
+  --tw-prose-invert-links: var(--accent-ink);
+  --tw-prose-invert-bold: var(--fg);
+  --tw-prose-invert-counters: var(--fg-3);
+  --tw-prose-invert-bullets: var(--line-hi);
+  --tw-prose-invert-hr: var(--line);
+  --tw-prose-invert-quotes: var(--fg);
+  --tw-prose-invert-quote-borders: var(--accent);
+  --tw-prose-invert-captions: var(--fg-3);
+  --tw-prose-invert-code: var(--fg);
+  --tw-prose-invert-pre-code: var(--fg-2);
+  --tw-prose-invert-pre-bg: var(--bg-band);
+  --tw-prose-invert-th-borders: var(--line-hi);
+  --tw-prose-invert-td-borders: var(--line);
+
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+
+.prose :where(h2) {
+  font-size: 1.625rem;
+  letter-spacing: -0.02em;
+  margin-top: 2.75em;
+  margin-bottom: 0.9em;
+}
+
+.prose :where(h3) {
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  margin-top: 2em;
+}
+
+/* Code blocks read as a terminal, which is what most of them are */
+.prose :where(pre) {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  padding: 1.1rem 1.25rem;
+}
+
+.prose :where(code):not(:where(pre code)) {
+  background: var(--bg-band);
+  border: 1px solid var(--line);
+  border-radius: 0.3rem;
+  padding: 0.1rem 0.35rem;
+  font-size: 0.875em;
+  font-weight: 400;
+}
+
+.prose :where(code):not(:where(pre code))::before,
+.prose :where(code):not(:where(pre code))::after {
+  content: none;
+}
+
+/* Tables get the hairline treatment used everywhere else */
+.prose :where(table) {
+  font-size: 0.9375rem;
+}
+
+.prose :where(thead th) {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--fg-3);
+}
+
+.prose :where(blockquote) {
+  font-style: normal;
+  font-weight: 400;
+}
+
 /* Video embedded in a post behaves like a GIF but costs a fraction of one */
 .prose figure video {
   width: 100%;

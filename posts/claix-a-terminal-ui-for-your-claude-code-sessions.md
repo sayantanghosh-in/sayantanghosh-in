@@ -2,6 +2,7 @@
 title: "claix: a terminal UI for your Claude Code sessions"
 date: "2026-09-24"
 author: "Sayantan Ghosh"
+category: "Engineering"
 description: "Claude Code scatters your sessions across every project you have ever opened, with no way to find the one you want. claix indexes them all, makes them searchable, and resumes any of them in the right directory."
 tags: ["Claude Code", "Go", "Terminal", "Open Source", "Developer Tools"]
 published: true

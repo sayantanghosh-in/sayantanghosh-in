@@ -2,6 +2,7 @@
 title: "Building swale: a terminal assistant that decides what to look at"
 date: "2026-09-24"
 author: "Sayantan Ghosh"
+category: "Engineering"
 description: "Why I am building a local-first developer assistant with a real agent loop instead of another todo CLI — and what I learned about the line between a workflow and an agent."
 tags: ["AI", "Agents", "TypeScript", "Open Source", "Developer Tools"]
 published: false

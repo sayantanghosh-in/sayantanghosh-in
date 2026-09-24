@@ -34,10 +34,8 @@ export function Hero() {
                 style={{ "--delay": "180ms" } as React.CSSProperties}
               >
                 Nine years of turning ambiguous product bets into shipped
-                systems. This year that means a production agent I took from
-                research question to revenue: RAG over a SQL vector store, an
-                MCP tool surface, LangSmith traces, an eval suite that gates
-                every change, and open-weight models I host myself.
+                systems. This year, a production agent taken from research
+                question to revenue.
               </p>
 
               <div

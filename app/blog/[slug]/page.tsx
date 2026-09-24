@@ -5,7 +5,12 @@ import { format } from "date-fns";
 import { IconArrowLeft } from "@tabler/icons-react";
 
 import { EmbedLoader } from "@/components/site/EmbedLoader";
-import { getPostContent, getPostSlugs, type PostContent } from "@/lib/posts";
+import {
+  getPostContent,
+  getPostSlugs,
+  getSortedPostsData,
+  type PostContent,
+} from "@/lib/posts";
 import { SITE } from "@/lib/site";
 
 export async function generateStaticParams() {
@@ -64,6 +69,12 @@ export default async function PostPage({ params }: PostPageProps) {
     notFound();
   }
 
+  const allPosts = getSortedPostsData();
+  const currentIndex = allPosts.findIndex((entry) => entry.slug === slug);
+  // The list is newest first, so the "previous" post is the next index along.
+  const previous = currentIndex >= 0 ? allPosts[currentIndex + 1] : undefined;
+  const next = currentIndex > 0 ? allPosts[currentIndex - 1] : undefined;
+
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -85,7 +96,7 @@ export default async function PostPage({ params }: PostPageProps) {
       />
       <EmbedLoader />
 
-      <article className="border-b border-line">
+      <article>
         <div className="container-page">
           <div className="rails px-4 py-12 sm:px-8 sm:py-16">
             <Link
@@ -96,37 +107,92 @@ export default async function PostPage({ params }: PostPageProps) {
               All writing
             </Link>
 
-            <header className="mt-8 border-b border-line pb-8">
-              <h1 className="display-lg max-w-[22ch]">{post.title}</h1>
-              <div className="eyebrow mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
+            <header className="mt-10">
+              <div className="eyebrow flex flex-wrap items-center gap-x-3 gap-y-1">
+                {post.category ? (
+                  <>
+                    <span className="text-accent-ink">{post.category}</span>
+                    <span aria-hidden className="text-line-hi">
+                      /
+                    </span>
+                  </>
+                ) : null}
                 <time dateTime={post.date}>
                   {format(new Date(post.date), "dd MMMM yyyy")}
                 </time>
-                <span aria-hidden>·</span>
-                <span>{post.author}</span>
+                <span aria-hidden className="text-line-hi">
+                  /
+                </span>
+                <span>{post.readingMinutes} min read</span>
               </div>
-              {post.tags?.length ? (
-                <ul className="mt-5 flex flex-wrap gap-2">
-                  {post.tags.map((tag) => (
-                    <li
-                      key={tag}
-                      className="eyebrow rounded-full border border-line px-2.5 py-1 text-fg-3"
-                    >
-                      {tag.replace(/^#/, "")}
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
+
+              <h1 className="display-lg mt-5 max-w-[20ch]">{post.title}</h1>
+
+              <p className="mt-6 max-w-[var(--measure)] text-lg text-fg-2">
+                {post.description}
+              </p>
             </header>
 
+            <hr className="mt-12 border-line" />
+
             <div
-              className="prose prose-neutral mt-10 max-w-[68ch] dark:prose-invert prose-headings:font-[family-name:var(--font-display)] prose-headings:tracking-tight prose-a:text-accent-ink prose-a:decoration-accent/30 prose-a:underline-offset-4 hover:prose-a:decoration-accent prose-blockquote:border-l-accent prose-code:rounded prose-code:bg-bg-band prose-code:px-1.5 prose-code:py-0.5 prose-code:font-normal prose-code:before:content-none prose-code:after:content-none prose-pre:border prose-pre:border-line prose-pre:bg-bg-band"
+              className="prose mt-12 max-w-[var(--measure)] prose-headings:font-[family-name:var(--font-display)]"
               dangerouslySetInnerHTML={{ __html: post.contentHtml }}
               suppressHydrationWarning
             />
+
+            {post.tags?.length ? (
+              <ul className="mt-14 flex flex-wrap gap-2 border-t border-line pt-8">
+                {post.tags.map((tag) => (
+                  <li
+                    key={tag}
+                    className="eyebrow rounded-full border border-line px-2.5 py-1 text-fg-3"
+                  >
+                    {tag.replace(/^#/, "")}
+                  </li>
+                ))}
+              </ul>
+            ) : null}
           </div>
         </div>
       </article>
+
+      {(previous || next) && (
+        <nav
+          aria-label="More posts"
+          className="border-y border-line bg-bg-band"
+        >
+          <div className="container-page">
+            <div className="rails grid gap-px bg-line sm:grid-cols-2">
+              {previous ? (
+                <Link
+                  href={`/blog/${previous.slug}`}
+                  className="group bg-bg-band px-5 py-8 transition-colors duration-200 hover:bg-bg-elev sm:px-8"
+                >
+                  <span className="eyebrow">← Previous</span>
+                  <span className="mt-2 block font-medium transition-colors duration-200 group-hover:text-accent-ink">
+                    {previous.title}
+                  </span>
+                </Link>
+              ) : (
+                <span className="hidden bg-bg-band sm:block" />
+              )}
+              {next ? (
+                <Link
+                  href={`/blog/${next.slug}`}
+                  className="group bg-bg-band px-5 py-8 text-right transition-colors duration-200 hover:bg-bg-elev sm:px-8"
+                >
+                  <span className="eyebrow">Next →</span>
+                  <span className="mt-2 block font-medium transition-colors duration-200 group-hover:text-accent-ink">
+                    {next.title}
+                  </span>
+                </Link>
+              ) : null}
+            </div>
+          </div>
+        </nav>
+      )}
+
     </>
   );
 }

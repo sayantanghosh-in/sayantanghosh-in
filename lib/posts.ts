@@ -20,7 +20,21 @@ export type PostData = {
    * field entirely means published, so existing posts are unaffected.
    */
   published?: boolean;
+  /**
+   * Free-form label shown beside the post. Use it to separate the engineering
+   * writing from everything else — "Engineering", "Personal", "Notes".
+   * Defaults to "Writing" when absent.
+   */
+  category?: string;
+  /** Minutes, derived from word count. Not set in frontmatter. */
+  readingMinutes: number;
 };
+
+/** ~220 words a minute, rounded up, floor of one. */
+function readingTime(markdown: string): number {
+  const words = markdown.trim().split(/\s+/).length;
+  return Math.max(1, Math.round(words / 220));
+}
 
 /** A post is visible unless it explicitly opts out. */
 function isPublished(post: { published?: boolean }): boolean {
@@ -52,12 +66,13 @@ export function getSortedPostsData(max?: number): PostData[] {
 
     // Use gray-matter to parse the post metadata section
     const matterResult = matter(fileContents);
-    const data = matterResult.data as Omit<PostData, "slug">;
+    const data = matterResult.data as Omit<PostData, "slug" | "readingMinutes">;
 
     // Combine the data with the slug and return
     return {
       slug,
       ...data,
+      readingMinutes: readingTime(matterResult.content),
     };
   });
 
@@ -126,6 +141,7 @@ export async function getPostContent(slug: string): Promise<PostContent> {
   return {
     slug,
     contentHtml,
-    ...(data as Omit<PostData, "slug">),
+    ...(data as Omit<PostData, "slug" | "readingMinutes">),
+    readingMinutes: readingTime(content),
   };
 }

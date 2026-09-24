@@ -8,27 +8,27 @@ import { Reveal } from "@/components/site/Reveal";
 const agentStack = [
   {
     label: "Architecture",
-    body: "A LangGraph state machine over LangChain tooling, so multi-step tool use is explicit, resumable and testable rather than a prompt loop.",
+    body: "A LangGraph state machine over LangChain tooling — multi-step tool use that is explicit, resumable and testable.",
   },
   {
     label: "Retrieval",
-    body: "RAG over a SQL vector store, with grounding measured against the eval suite rather than assumed.",
+    body: "RAG over a SQL vector store, with grounding measured rather than assumed.",
   },
   {
     label: "Tool surface",
-    body: "Built and integrated MCP servers, internal and third-party, and re-architected how the tool catalogue reaches the model.",
+    body: "MCP servers built and integrated, and the tool catalogue re-architected around how the model reads it.",
   },
   {
     label: "Observability",
-    body: "Every run traced in LangSmith, so regressions in tool selection and retrieval surface before customers meet them.",
+    body: "Every run traced in LangSmith, so regressions surface before customers meet them.",
   },
   {
     label: "Evaluation",
-    body: "An eval suite of golden conversations gates every prompt, catalogue and model change before it ships.",
+    body: "Golden conversations that gate every prompt, catalogue and model change.",
   },
   {
     label: "Inference",
-    body: "Open-weight models self-hosted on Runpod alongside hosted APIs, chosen per workload for cost, latency and data control.",
+    body: "Open-weight models self-hosted on Runpod, chosen per workload for cost and data control.",
   },
 ] as const;
 
@@ -62,7 +62,7 @@ const synupLadder: Role[] = [
   {
     designation: "Senior Software Engineer",
     date: "Oct 2022 – May 2026",
-    lead: "Synup's products had drifted into several slightly different versions of the same buttons, tables and forms, and customers felt it as inconsistency. Standardising them was less a coding problem than a consensus problem: I brought the frontend engineers across teams to one component contract rather than mandating it, and shipped it as a private npm package with Storybook as the living spec. I treated internal developers as the customers — adoption was the metric, not the release — and customer churn fell 15% as the product stopped contradicting itself.",
+    lead: "Synup's products had drifted into several versions of the same buttons, tables and forms, and customers felt it as inconsistency. Standardising them was a consensus problem more than a coding one: I brought the frontend engineers across teams to one component contract rather than mandating it, and shipped it as a private npm package with Storybook as the spec. Internal developers were the customers — adoption was the metric, not the release — and churn fell 15%.",
     detail: [
       "Led UI for new marketing products and mentored junior engineers, improving onboarding efficiency by about 25%.",
       "Led 50 CRM integrations processing over 2M mailbox messages a month, and built a unified email-parsing suite behind them.",
@@ -240,14 +240,12 @@ export function Experience() {
 
                   <div className="px-5 py-7 sm:px-7">
                     <p className="max-w-[68ch] text-base text-fg-2">
-                      I lead Synup&rsquo;s AI product line end to end. I took the
-                      agent from a research question to a revenue-generating
-                      product — I designed the architecture, built the retrieval
-                      and tool layers, wrote the evaluation suite every change
-                      has to pass, and host the open-weight models it runs on —
-                      and I run the team that ships it. Alongside it I built and
-                      drove adoption of the internal platform the engineering org
-                      now runs on.
+                      I took Synup&rsquo;s agent from a research question to a
+                      revenue-generating product, and I run the team that ships
+                      it. Architecture, retrieval, tool surface, evals and
+                      inference — all of it. Alongside it I built and drove
+                      adoption of the internal platform the engineering org now
+                      runs on.
                     </p>
 
                     {/* Six-cell strip: end-to-end ownership, scannable */}
