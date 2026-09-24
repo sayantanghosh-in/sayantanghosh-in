@@ -38,7 +38,7 @@ const leadMetrics = [
 ] as const;
 
 const leadHighlights = [
-  "Shipped an AI agent product line from ideation to GA — orchestrated in LangGraph, grounded by RAG over a SQL vector store, exposed to customers through Slack — reaching paid adoption in month one and opening a new revenue stream.",
+  "Shipped an AI agent product from ideation to GA — LangGraph orchestration, RAG over a SQL vector store, Slack as the interface. Paid adoption in month one.",
   "Built the evaluation harness before scaling the agent, covering tool selection, retrieval grounding and answer quality. Every prompt, catalogue and model change ships only when the eval run is green — which is what let the team swap models and reshape the tool surface without regressions.",
   "Cut tokens per request by 80% by re-architecting how the tool catalogue is exposed to the model, verified against the eval suite and LangSmith traces rather than by eyeballing outputs.",
 ] as const;
@@ -62,7 +62,7 @@ const synupLadder: Role[] = [
   {
     designation: "Senior Software Engineer",
     date: "Oct 2022 – May 2026",
-    lead: "Synup's products had drifted into several versions of the same buttons, tables and forms, and customers felt it as inconsistency. Standardising them was a consensus problem more than a coding one: I brought the frontend engineers across teams to one component contract rather than mandating it, and shipped it as a private npm package with Storybook as the spec. Internal developers were the customers — adoption was the metric, not the release — and churn fell 15%.",
+    lead: "Synup's products had drifted into several versions of the same buttons and tables, and customers felt it as inconsistency. Standardising them was a consensus problem more than a coding one: I brought the frontend engineers across teams to one component contract rather than mandating it. Internal developers were the customers — adoption was the metric, not the release. Churn fell 15%.",
     detail: [
       "Led UI for new marketing products and mentored junior engineers, improving onboarding efficiency by about 25%.",
       "Led 50 CRM integrations processing over 2M mailbox messages a month, and built a unified email-parsing suite behind them.",
@@ -161,7 +161,7 @@ export function Experience() {
         <div className="rails px-4 py-16 sm:px-8 sm:py-24">
           <Reveal>
             <p className="eyebrow">Experience</p>
-            <h2 className="display-lg mt-3">Nine years, five companies</h2>
+            <h2 className="display-lg scroll-enter mt-3">Nine years, five companies</h2>
           </Reveal>
 
           {/* Proportional tenure bar */}
@@ -230,7 +230,7 @@ export function Experience() {
             <div className="space-y-6">
               {/* ---------- Feature card: the current role ---------- */}
               <Reveal>
-                <article className="card-surface overflow-hidden shadow-paper">
+                <article className="card-surface scroll-settle overflow-hidden shadow-paper">
                   <div className="border-b border-line bg-bg-band px-5 py-5 sm:px-7">
                     <p className="eyebrow text-accent-ink">
                       Now · Jun 2026 – Present
@@ -240,12 +240,10 @@ export function Experience() {
 
                   <div className="px-5 py-7 sm:px-7">
                     <p className="max-w-[68ch] text-base text-fg-2">
-                      I took Synup&rsquo;s agent from a research question to a
-                      revenue-generating product, and I run the team that ships
-                      it. Architecture, retrieval, tool surface, evals and
-                      inference — all of it. Alongside it I built and drove
-                      adoption of the internal platform the engineering org now
-                      runs on.
+                      I took Synup&rsquo;s AI agent from research question to
+                      revenue, and I run the team that ships it — architecture
+                      through to inference. I also built the internal platform
+                      the engineering org now runs on.
                     </p>
 
                     {/* Six-cell strip: end-to-end ownership, scannable */}
@@ -329,7 +327,7 @@ export function Experience() {
               {/* ---------- The ladder below it ---------- */}
               {synupLadder.map((role, index) => (
                 <Reveal key={role.designation} delay={index * 60}>
-                  <article className="card-surface px-5 py-6 hover:border-line-hi hover:shadow-paper sm:px-7">
+                  <article className="card-surface scroll-settle px-5 py-6 hover:border-line-hi hover:shadow-paper sm:px-7">
                     <p className="eyebrow">{role.date}</p>
                     <h3 className="mt-1.5 text-lg font-semibold">
                       {role.designation} — Synup

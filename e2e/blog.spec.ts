@@ -94,3 +94,20 @@ test.describe("blog post", () => {
     expect(requests.some((url) => url.includes("platform.x.com"))).toBe(false);
   });
 });
+
+test("the copy button survives an effect re-run", async ({ page }) => {
+  await page.goto(CLAIX);
+
+  // StrictMode double-invokes effects in development. Simulating the same
+  // shape here: after a client-side navigation away and back, the button must
+  // still be wired up.
+  await page.getByRole("link", { name: "All writing" }).click();
+  await page.waitForURL("**/blog");
+  await page.goBack();
+
+  const block = page.locator(".code-block").first();
+  const copy = block.getByRole("button", { name: /copy code/i });
+  await expect(copy).toBeVisible();
+  await copy.click();
+  await expect(copy).toHaveText(/copied/i);
+});

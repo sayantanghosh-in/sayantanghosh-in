@@ -95,6 +95,7 @@ export default async function PostPage({ params }: PostPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
+      <div aria-hidden className="read-progress" />
       <EmbedLoader />
       <CodeCopy />
 

@@ -14,6 +14,7 @@
   --color-line: var(--line);
   --color-line-hi: var(--line-hi);
   --color-accent: var(--accent);
+  --color-accent-band: var(--accent-band);
   --color-accent-ink: var(--accent-ink);
   --color-accent-soft: var(--accent-soft);
   --color-highlight: var(--highlight);
@@ -497,3 +498,154 @@ html:not(.dark) .prose :where(pre) span {
 }
 
 
+
+/* ============================================================
+   Marquee ribbon
+   ============================================================ */
+.marquee {
+  --marquee-duration: 38s;
+  position: relative;
+  overflow: hidden;
+  background: var(--accent-band);
+  color: oklch(0.985 0.008 85);
+  transform: rotate(var(--tilt, -2deg)) scaleX(1.06);
+  transform-origin: center;
+  padding-block: 0.85rem;
+  margin-block: -0.5rem;
+  z-index: 1;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  animation: marquee-scroll var(--marquee-duration) linear infinite;
+}
+
+.marquee-track[data-reverse] {
+  animation-direction: reverse;
+}
+
+.marquee-group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.marquee-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 2.25rem;
+  padding-inline: 1.125rem;
+  font-family: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(0.9375rem, 0.85rem + 0.4vw, 1.25rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+.marquee-star {
+  font-size: 0.7em;
+  opacity: 0.75;
+}
+
+/* Two identical groups translated by exactly half the track = a seamless loop */
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+  .marquee {
+    /* Static, and only the first group is worth showing */
+    justify-content: center;
+    display: flex;
+  }
+  .marquee-group:nth-child(2) {
+    display: none;
+  }
+}
+
+/* ============================================================
+   Scroll-driven enhancements
+   ============================================================ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Section headings ease up as they enter */
+    @keyframes heading-enter {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .scroll-enter {
+      animation: heading-enter linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 22%;
+    }
+
+    /* Cards lift very slightly as they cross the viewport */
+    @keyframes card-settle {
+      from {
+        opacity: 0.55;
+        transform: translateY(12px) scale(0.995);
+      }
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .scroll-settle {
+      animation: card-settle linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 18%;
+    }
+  }
+}
+
+/* Reading progress on long-form pages, driven by scroll with no JS */
+.read-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+  transform-origin: left;
+  transform: scaleX(0);
+  z-index: 60;
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    @keyframes read-fill {
+      to {
+        transform: scaleX(1);
+      }
+    }
+
+    .read-progress {
+      animation: read-fill linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}

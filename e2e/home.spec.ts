@@ -29,10 +29,10 @@ test.describe("homepage", () => {
     await page.goto("/");
     // The counter renders value and suffix as separate nodes, so match the
     // tile rather than an exact string.
-    const strip = page.locator("section").filter({
-      hasText: "fewer tokens per request after re-architecting",
-    });
-    await expect(strip.locator(".numeral").first()).toContainText(/\d/);
+    // Four tiles, each with a numeral that has resolved to a real value.
+    const numerals = page.locator(".numeral");
+    await expect(numerals.first()).toContainText(/\d/);
+    expect(await numerals.count()).toBeGreaterThanOrEqual(4);
   });
 
   test("lists only claix and swale under selected work", async ({ page }) => {
@@ -102,4 +102,28 @@ test("install commands on the landing page are copyable", async ({ page }) => {
 
   const clipboard = await page.evaluate(() => navigator.clipboard.readText());
   expect(clipboard).toContain("brew install sayantanghosh-in/tap/claix");
+});
+
+test("the marquee is decorative and hidden from assistive tech", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const marquee = page.locator(".marquee");
+  await expect(marquee).toBeVisible();
+  await expect(marquee).toHaveAttribute("aria-hidden", "true");
+});
+
+test("body copy stays inside a readable measure", async ({ page }) => {
+  await page.goto("/");
+
+  // Long paragraphs are the thing that makes a portfolio feel like a document.
+  // 75 words is roughly four lines at this measure.
+  const tooLong = await page.evaluate(() => {
+    const nodes = Array.from(document.querySelectorAll("main p, main li"));
+    return nodes
+      .map((node) => (node.textContent ?? "").trim())
+      .filter((text) => text.split(/\s+/).length > 75);
+  });
+
+  expect(tooLong).toEqual([]);
 });

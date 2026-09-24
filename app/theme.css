@@ -49,6 +49,9 @@
    * --accent-soft selection highlight, subtle fills.
    * --highlight   marker-pen underline. Use on two phrases, at most. */
   --accent: oklch(0.63 0.176 44);
+  /* Deeper than --accent so cream text on the marquee band reaches 5.54:1.
+   * At --accent it was 3.51:1 and hard to read for everyone, not just AT users. */
+  --accent-band: oklch(0.52 0.176 44);
   --accent-ink: oklch(0.5 0.16 42);
   --accent-soft: oklch(0.63 0.176 44 / 12%);
   --highlight: oklch(0.925 0.115 96);
@@ -106,6 +109,7 @@
   /* Accents lift in dark mode — the same hue at the same lightness reads
    * muddy against a dark surface. */
   --accent: oklch(0.755 0.155 52);
+  --accent-band: oklch(0.52 0.17 46);
   --accent-ink: oklch(0.8 0.145 55);
   --accent-soft: oklch(0.755 0.155 52 / 16%);
   --highlight: oklch(0.45 0.1 96);

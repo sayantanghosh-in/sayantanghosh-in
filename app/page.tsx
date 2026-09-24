@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Experience } from "@/components/Experience";
 import { Hero } from "@/components/Hero";
 import { ImpactStrip } from "@/components/ImpactStrip";
+import { Marquee } from "@/components/site/Marquee";
 import { Projects } from "@/components/Projects";
 import { Writing } from "@/components/Writing";
 import { SITE, SOCIALS } from "@/lib/site";
@@ -51,6 +52,7 @@ export default function Home() {
       <Hero />
       <ImpactStrip />
       <Experience />
+      <Marquee />
       <Projects />
       <Writing />
     </>

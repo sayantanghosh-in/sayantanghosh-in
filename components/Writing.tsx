@@ -15,7 +15,7 @@ export function Writing() {
         <div className="rails px-4 py-16 sm:px-8 sm:py-24">
           <Reveal>
             <p className="eyebrow">Writing &amp; video</p>
-            <h2 className="display-lg mt-3">Essays and notes</h2>
+            <h2 className="display-lg scroll-enter mt-3">Essays and notes</h2>
             <p className="mt-4 max-w-[52ch] text-base text-fg-2">
               Engineering, mostly. Occasionally not.
             </p>

@@ -12,12 +12,12 @@ const metrics: Metric[] = [
   {
     value: 80,
     suffix: "%",
-    label: "fewer tokens per request after re-architecting the agent tool catalogue",
+    label: "fewer tokens per request, after re-architecting the agent tool catalogue",
   },
   {
     value: 20,
     suffix: "",
-    label: "engineers saving 2–4 hrs/week through a native MCP server for Claude Code",
+    label: "engineers saving 2–4 hrs a week via a native MCP server",
   },
   {
     value: 12,
@@ -28,7 +28,7 @@ const metrics: Metric[] = [
   {
     value: 9,
     suffix: " yrs",
-    label: "across five companies, frontend through backend to AI",
+    label: "across five companies — frontend, backend, then AI",
   },
 ];
 

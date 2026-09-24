@@ -63,7 +63,7 @@ export async function Projects() {
         <div className="rails px-4 py-16 sm:px-8 sm:py-24">
           <Reveal>
             <p className="eyebrow">Selected work</p>
-            <h2 className="display-lg mt-3">Things I built and shipped</h2>
+            <h2 className="display-lg scroll-enter mt-3">Things I built and shipped</h2>
             <p className="mt-4 max-w-[60ch] text-base text-fg-2">
               Open source, in the open. Both solve a problem I had first.
             </p>
@@ -72,7 +72,7 @@ export async function Projects() {
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
             {projects.map((project, index) => (
               <Reveal key={project.repo} delay={index * 80}>
-                <article className="card-surface flex h-full flex-col p-6 hover:-translate-y-0.5 hover:border-line-hi hover:shadow-lift sm:p-7">
+                <article className="card-surface scroll-settle flex h-full flex-col p-6 hover:-translate-y-0.5 hover:border-line-hi hover:shadow-lift sm:p-7">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <h3 className="display-md">{project.name}</h3>
