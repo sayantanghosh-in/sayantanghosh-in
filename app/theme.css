@@ -31,7 +31,9 @@
    * copy, fg-3 for metadata. If you need a fourth step, the layout is wrong. */
   --fg: oklch(0.205 0.02 60);
   --fg-2: oklch(0.44 0.018 60);
-  --fg-3: oklch(0.585 0.015 60);
+  /* 4.59:1 on --bg-band, the darkest light surface it sits on. Do not
+   * lighten: 0.585 was 3.65:1 there and failed AA for the 11px eyebrow. */
+  --fg-3: oklch(0.53 0.015 60);
 
   /* --- Hairlines ----------------------------------------------------------
    * The rails and dividers that give the site its structure. */

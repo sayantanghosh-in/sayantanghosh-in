@@ -1,5 +1,6 @@
 import { IconBrandGithub, IconStar } from "@tabler/icons-react";
 
+import { CodeCopy } from "@/components/site/CodeCopy";
 import { Reveal } from "@/components/site/Reveal";
 
 type Project = {
@@ -57,6 +58,7 @@ export async function Projects() {
 
   return (
     <section id="work" className="border-b border-line">
+      <CodeCopy />
       <div className="container-page">
         <div className="rails px-4 py-16 sm:px-8 sm:py-24">
           <Reveal>
@@ -97,9 +99,14 @@ export async function Projects() {
                   </p>
 
                   {project.install ? (
-                    <code className="mt-6 block overflow-x-auto rounded-md border border-line bg-bg-band px-3 py-2.5 font-mono text-xs text-fg-2">
-                      {project.install}
-                    </code>
+                    <div className="code-block mt-6">
+                      <code
+                        data-copyable
+                        className="block overflow-x-auto rounded-md border border-line bg-bg-band py-2.5 pl-3 pr-20 font-mono text-xs text-fg-2"
+                      >
+                        {project.install}
+                      </code>
+                    </div>
                   ) : null}
 
                   <ul className="mt-5 flex flex-wrap gap-2">

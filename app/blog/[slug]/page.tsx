@@ -165,7 +165,7 @@ export default async function PostPage({ params }: PostPageProps) {
           className="border-y border-line bg-bg-band"
         >
           <div className="container-page">
-            <div className="rails grid gap-px bg-line sm:grid-cols-2">
+            <div className={`rails grid gap-px bg-line ${previous && next ? "sm:grid-cols-2" : ""}`}>
               {previous ? (
                 <Link
                   href={`/blog/${previous.slug}`}
@@ -176,9 +176,7 @@ export default async function PostPage({ params }: PostPageProps) {
                     {previous.title}
                   </span>
                 </Link>
-              ) : (
-                <span className="hidden bg-bg-band sm:block" />
-              )}
+              ) : null}
               {next ? (
                 <Link
                   href={`/blog/${next.slug}`}
