@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { format } from "date-fns";
 import { IconArrowLeft } from "@tabler/icons-react";
 
+import { CodeCopy } from "@/components/site/CodeCopy";
 import { EmbedLoader } from "@/components/site/EmbedLoader";
 import {
   getPostContent,
@@ -95,6 +96,7 @@ export default async function PostPage({ params }: PostPageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
       <EmbedLoader />
+      <CodeCopy />
 
       <article>
         <div className="container-page">

@@ -406,3 +406,85 @@
 .prose blockquote.twitter-tweet::after {
   content: none;
 }
+
+/* ---- Code blocks --------------------------------------------------------
+ * rehype-pretty-code emits one span per token with a light and a dark colour
+ * on each. Swapping which one applies is how highlighting follows the theme
+ * without shipping two stylesheets.
+ */
+.prose :where(pre) span[data-line] {
+  display: block;
+}
+
+html:not(.dark) .prose :where(pre) [data-highlighted-line],
+html:not(.dark) .prose :where(pre) span {
+  color: var(--shiki-light);
+}
+
+.dark .prose :where(pre) [data-highlighted-line],
+.dark .prose :where(pre) span {
+  color: var(--shiki-dark);
+}
+
+.prose :where(figure[data-rehype-pretty-code-figure]) {
+  margin-block: 1.75em;
+}
+
+.prose :where(figure[data-rehype-pretty-code-figure]) figcaption {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--fg-3);
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+/* Copy button, injected client-side after mount */
+.code-block {
+  position: relative;
+}
+
+.code-copy {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.625rem;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--fg-3);
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  border-radius: 0.375rem;
+  padding: 0.3rem 0.55rem;
+  cursor: pointer;
+  opacity: 0;
+  transition:
+    opacity var(--dur-base) var(--ease-standard),
+    color var(--dur-base) var(--ease-standard),
+    border-color var(--dur-base) var(--ease-standard);
+}
+
+.code-block:hover .code-copy,
+.code-copy:focus-visible {
+  opacity: 1;
+}
+
+.code-copy:hover {
+  color: var(--fg);
+  border-color: var(--line-hi);
+}
+
+.code-copy[data-copied] {
+  opacity: 1;
+  color: var(--accent-ink);
+  border-color: var(--accent);
+}
+
+/* Touch devices have no hover, so the button is always visible there */
+@media (hover: none) {
+  .code-copy {
+    opacity: 1;
+  }
+}

@@ -2,8 +2,10 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { remark } from "remark";
+import remarkGfm from "remark-gfm";
 import remarkRehype from "remark-rehype";
 import rehypeRaw from "rehype-raw";
+import rehypePrettyCode from "rehype-pretty-code";
 import rehypeStringify from "rehype-stringify";
 
 // Define the type for the frontmatter metadata
@@ -127,12 +129,24 @@ export async function getPostContent(slug: string): Promise<PostContent> {
     throw new Error(`Post "${slug}" is not published`);
   }
 
-  // Using remark-rehype pipeline to convert markdown into an HTML string
-  // This pipeline specifically supports raw HTML tags (like <img>) inside markdown
+  /*
+   * remark-gfm is not optional: without it, tables, strikethrough, task lists
+   * and bare autolinks are not parsed at all, and table rows end up in the page
+   * as literal pipe characters.
+   *
+   * rehype-pretty-code runs Shiki at build time, so syntax highlighting costs
+   * zero client-side JavaScript.
+   */
   const processedContent = await remark()
+    .use(remarkGfm)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
-    .use(rehypeStringify)
+    .use(rehypePrettyCode, {
+      theme: { light: "github-light", dark: "github-dark" },
+      keepBackground: false,
+      defaultLang: "text",
+    })
+    .use(rehypeStringify, { allowDangerousHtml: true })
     .process(content);
 
   const contentHtml = processedContent.toString();
