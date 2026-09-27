@@ -63,7 +63,7 @@ test.describe("motion", () => {
     await page.goto("/");
 
     await expect(
-      page.getByRole("heading", { name: "Nine years, five companies" }),
+      page.getByRole("heading", { name: "Where I have worked" }),
     ).toBeVisible();
     await context.close();
   });

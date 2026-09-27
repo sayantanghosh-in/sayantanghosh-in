@@ -1,4 +1,4 @@
-import { IconBrandYoutube } from "@tabler/icons-react";
+import { IconBrandX, IconBrandYoutube } from "@tabler/icons-react";
 
 import { PostRow } from "@/components/PostRow";
 import {
@@ -17,7 +17,7 @@ export function Writing() {
   return (
     <Section id="writing">
       <SectionHeading
-        eyebrow="Writing & video"
+        eyebrow="Writing"
         title="Essays and notes"
         lede="Engineering, mostly. Occasionally not."
       />
@@ -37,17 +37,34 @@ export function Writing() {
           </div>
         </div>
 
+        {/*
+         * X is where the day-to-day goes, so it gets the card. The YouTube
+         * channel still exists but is dormant — it sits below the rule as a
+         * footnote rather than a second call to action.
+         */}
         <Reveal delay={120}>
           <Card className="p-6">
-            <IconBrandYoutube size={22} className="text-accent" />
-            <h3 className="display-md mt-4">On YouTube</h3>
+            <IconBrandX size={22} className="text-accent" />
+            <h3 className="display-md mt-4">On X</h3>
             <p className="mt-3 text-sm text-fg-2">
-              Short-form videos on what I am building and learning.
+              Build notes, half-finished ideas, and whatever I am reading.
             </p>
             <div className="mt-6">
-              <ArrowLink external href={SOCIALS.youtube}>
-                Subscribe
+              <ArrowLink external href={SOCIALS.x}>
+                Follow
               </ArrowLink>
+            </div>
+
+            <div className="mt-6 border-t border-line pt-5">
+              <a
+                href={SOCIALS.youtube}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 text-sm text-fg-3 transition-colors duration-200 hover:text-fg"
+              >
+                <IconBrandYoutube size={16} aria-hidden />
+                Older videos on YouTube
+              </a>
             </div>
           </Card>
         </Reveal>

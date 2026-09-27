@@ -12,23 +12,23 @@ const metrics: Metric[] = [
   {
     value: 80,
     suffix: "%",
-    label: "fewer tokens per request, after re-architecting the agent tool catalogue",
+    label: "fewer tokens per request, after re-architecting an agent's tool surface",
   },
   {
-    value: 20,
+    value: 6,
     suffix: "",
-    label: "engineers saving 2–4 hrs a week via a native MCP server",
+    label:
+      "stages of the agent owned end to end — architecture through to inference",
   },
   {
-    value: 12,
-    prefix: "$",
-    suffix: "k/yr",
-    label: "licensing removed by replacing JIRA company-wide",
+    value: 2,
+    suffix: "",
+    label: "open-source developer tools shipped and published this year",
   },
   {
-    value: 9,
-    suffix: " yrs",
-    label: "across five companies — frontend, backend, then AI",
+    value: 4,
+    suffix: "",
+    label: "junior engineers mentored into full-time roles",
   },
 ];
 
