@@ -18,6 +18,8 @@ type Project = {
   body: string;
   stack: readonly string[];
   install?: string;
+  /** Extra places the project lives, beyond GitHub. */
+  links?: readonly { label: string; href: string }[];
   /** Shown if the GitHub API is unreachable at build time. */
   fallbackStars: number;
 };
@@ -39,6 +41,12 @@ const projects: Project[] = [
     body: "Your pull requests, LeetCode streak, notes and todos in one local SQLite database — with an agent on top that decides for itself which to read. Works offline, against a model on your own machine.",
     stack: ["TypeScript", "Node", "SQLite", "Vercel AI SDK"],
     install: "npx @itssayantan/swale",
+    links: [
+      {
+        label: "View on npm",
+        href: "https://www.npmjs.com/package/@itssayantan/swale",
+      },
+    ],
     fallbackStars: 0,
   },
 ];
@@ -108,10 +116,15 @@ export async function Projects() {
 
               <PillList items={project.stack} />
 
-              <div className="mt-auto pt-6">
+              <div className="mt-auto flex flex-wrap items-center gap-x-6 gap-y-2 pt-6">
                 <ArrowLink external href={`https://github.com/${project.repo}`}>
                   View on GitHub
                 </ArrowLink>
+                {project.links?.map((link) => (
+                  <ArrowLink key={link.href} external href={link.href}>
+                    {link.label}
+                  </ArrowLink>
+                ))}
               </div>
             </Card>
           </Reveal>

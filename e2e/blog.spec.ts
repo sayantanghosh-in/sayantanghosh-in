@@ -1,7 +1,8 @@
 import { expect, test } from "@playwright/test";
 
 const CLAIX = "/blog/claix-a-terminal-ui-for-your-claude-code-sessions";
-const HIDDEN = "/blog/building-swale-a-terminal-assistant-with-a-mind-of-its-own";
+const HIDDEN =
+  "/blog/building-swale-a-terminal-assistant-with-a-mind-of-its-own";
 
 test.describe("blog index", () => {
   test("lists published posts with category and reading time", async ({
@@ -57,9 +58,7 @@ test.describe("blog post", () => {
     await copy.click();
     await expect(copy).toHaveAttribute("aria-label", /copied/i);
 
-    const clipboard = await page.evaluate(() =>
-      navigator.clipboard.readText(),
-    );
+    const clipboard = await page.evaluate(() => navigator.clipboard.readText());
     expect(clipboard).toContain("brew install");
   });
 
@@ -110,4 +109,25 @@ test("the copy button survives an effect re-run", async ({ page }) => {
   await expect(copy).toBeVisible();
   await copy.click();
   await expect(copy).toHaveAttribute("aria-label", /copied/i);
+});
+
+test("the post header fills its column rather than hugging the left edge", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/blog/hello-world");
+
+  const heading = page.getByRole("heading", { level: 1 });
+  const box = await heading.boundingBox();
+  const prose = await page.locator(".prose").boundingBox();
+  if (!box || !prose) throw new Error("missing layout box");
+
+  // The title used to be capped at 20ch inside a 72rem shell, which left it
+  // stranded in the left third. It should now share the prose column.
+  expect(Math.abs(box.x - prose.x)).toBeLessThan(2);
+  expect(box.width).toBeGreaterThan(prose.width * 0.9);
+
+  // And that column should sit centred in the viewport.
+  const rightGutter = 1280 - (prose.x + prose.width);
+  expect(Math.abs(prose.x - rightGutter)).toBeLessThan(4);
 });

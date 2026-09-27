@@ -100,7 +100,7 @@ export default async function PostPage({ params }: PostPageProps) {
       <CodeCopy />
 
       <article>
-        <div className="container-page">
+        <div className="container-read">
           <div className="rails px-4 py-12 sm:px-8 sm:py-16">
             <Link
               href="/blog"
@@ -129,17 +129,15 @@ export default async function PostPage({ params }: PostPageProps) {
                 <span>{post.readingMinutes} min read</span>
               </div>
 
-              <h1 className="display-lg mt-5 max-w-[20ch]">{post.title}</h1>
+              <h1 className="display-lg mt-5">{post.title}</h1>
 
-              <p className="mt-6 max-w-[var(--measure)] text-lg text-fg-2">
-                {post.description}
-              </p>
+              <p className="mt-6 text-lg text-fg-2">{post.description}</p>
             </header>
 
-            <hr className="mt-12 border-line" />
+            <hr className="mt-10 border-line" />
 
             <div
-              className="prose mt-12 max-w-[var(--measure)] prose-headings:font-[family-name:var(--font-display)]"
+              className="prose mt-10 max-w-none prose-headings:font-[family-name:var(--font-display)]"
               dangerouslySetInnerHTML={{ __html: post.contentHtml }}
               suppressHydrationWarning
             />
@@ -165,8 +163,10 @@ export default async function PostPage({ params }: PostPageProps) {
           aria-label="More posts"
           className="border-y border-line bg-bg-band"
         >
-          <div className="container-page">
-            <div className={`rails grid gap-px bg-line ${previous && next ? "sm:grid-cols-2" : ""}`}>
+          <div className="container-read">
+            <div
+              className={`rails grid gap-px bg-line ${previous && next ? "sm:grid-cols-2" : ""}`}
+            >
               {previous ? (
                 <Link
                   href={`/blog/${previous.slug}`}
@@ -193,7 +193,6 @@ export default async function PostPage({ params }: PostPageProps) {
           </div>
         </nav>
       )}
-
     </>
   );
 }

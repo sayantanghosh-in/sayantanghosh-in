@@ -1,3 +1,12 @@
+import { version } from "@/package.json";
+
+/**
+ * package.json is the single source of truth for the version, so the footer
+ * cannot drift from the release. v2 is the rebuild; the 0.1.0 left over from
+ * create-next-app never meant anything.
+ */
+export const VERSION = version;
+
 export const SITE = {
   name: "Sayantan Ghosh",
   role: "Tech Lead, AI Product Engineering",
@@ -6,7 +15,7 @@ export const SITE = {
   location: "Bengaluru, India",
   xHandle: "@sayantan__ghosh",
   description:
-    "Tech Lead at Synup, building production AI agents and the platforms behind them — LangGraph orchestration, RAG, MCP tool surfaces, evals and self-hosted inference. Nine years across frontend and backend engineering.",
+    "Tech Lead building production AI agents and the platforms behind them — LangGraph orchestration, RAG, MCP tool surfaces, evals and self-hosted inference. Frontend-leaning fullstack engineer.",
 } as const;
 
 export const SOCIALS = {

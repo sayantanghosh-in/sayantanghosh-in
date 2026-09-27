@@ -26,16 +26,15 @@ export function Hero() {
                 className="animate-rise text-lg text-fg sm:text-xl"
                 style={{ "--delay": "120ms" } as React.CSSProperties}
               >
-                I lead the team building Synup&rsquo;s AI agents — and the
-                evals, tooling and inference behind them.
+                I lead a team building production AI agents — and the evals,
+                tooling and inference behind them.
               </p>
               <p
                 className="animate-rise mt-5 text-base text-fg-2"
                 style={{ "--delay": "180ms" } as React.CSSProperties}
               >
-                Nine years of turning ambiguous product bets into shipped
-                systems. This year, a production agent taken from research
-                question to revenue.
+                Frontend-leaning fullstack, now mostly AI engineering. I like
+                the problems where nobody has decided what the answer is yet.
               </p>
 
               <div

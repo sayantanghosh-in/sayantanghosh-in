@@ -1,4 +1,6 @@
 import Link from "next/link";
+
+import { VERSION } from "@/lib/site";
 import {
   IconBrandGithub,
   IconBrandInstagram,
@@ -77,7 +79,20 @@ export function Footer() {
 
         <div className="rails flex flex-col gap-1 border-t border-line px-4 py-5 text-xs text-fg-3 sm:flex-row sm:justify-between sm:px-6">
           <span>Made in Bengaluru, India</span>
-          <span>© {new Date().getFullYear()} Sayantan Ghosh</span>
+          <span className="flex items-center gap-2">
+            <a
+              href="https://github.com/sayantanghosh-in/sayantanghosh-in"
+              target="_blank"
+              rel="noreferrer"
+              className="numeral transition-colors duration-200 hover:text-fg"
+            >
+              v{VERSION}
+            </a>
+            <span aria-hidden className="text-line-hi">
+              ·
+            </span>
+            <span>© {new Date().getFullYear()} Sayantan Ghosh</span>
+          </span>
         </div>
       </div>
     </footer>

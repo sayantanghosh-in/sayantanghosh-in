@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 
 type CardProps = {
   children: ReactNode;
+  id?: string;
   /** "feature" is the raised treatment used for the current role. */
   variant?: "default" | "feature";
   interactive?: boolean;
@@ -10,12 +11,14 @@ type CardProps = {
 
 export function Card({
   children,
+  id,
   variant = "default",
   interactive = false,
   className = "",
 }: CardProps) {
   return (
     <article
+      id={id}
       className={[
         "card-surface scroll-settle",
         variant === "feature" ? "overflow-hidden shadow-paper" : "",
@@ -23,6 +26,7 @@ export function Card({
           ? "hover:-translate-y-0.5 hover:border-line-hi hover:shadow-lift"
           : "",
         className,
+        id ? "scroll-mt-28" : "",
       ]
         .filter(Boolean)
         .join(" ")}
